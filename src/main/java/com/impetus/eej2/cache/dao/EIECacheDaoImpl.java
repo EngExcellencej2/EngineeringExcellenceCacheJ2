@@ -1,5 +1,8 @@
 package com.impetus.eej2.cache.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
@@ -16,6 +19,7 @@ import com.impetus.eej2.cache.utils.CassandraConnectionUtils;
  */
 
 public class EIECacheDaoImpl implements IEIECacheDao {
+	private static final Logger logger = LoggerFactory.getLogger(EIECacheDaoImpl.class);
 
 	private static final String GET_RECORD_FROM_CACHE = "SELECT * from eie_cache_db.eie_proxydbcache  where row_id = ?";
 	private static final String INSERT_RECORD_IN_CACHE = "INSERT INTO eie_cache_db.eie_proxydbcache "
@@ -26,6 +30,7 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 
 	@Override
 	public EIEResponse getEIEResponse(EIERequest eieReq) {
+		logger.info("inside getEIEResponse of EIECacheDaoImpl {}",eieReq);
 		String rowID = getRowID(eieReq);
 		PreparedStatement preparedStatement = null;
 		ResultSet rowSet = null;
@@ -79,7 +84,8 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 
 	@Override
 	public Boolean addEIEExternalReponse(EIEResponse eieRes) {
-		Session session = CassandraConnectionUtils.CONN.getSession();
+	//	Session session = CassandraConnectionUtils.CONN.getSession();
+		logger.info("inside addEIEExternalReponse of EIECacheDaoImpl {}",eieRes);
 		try {
 			PreparedStatement preparedStatement = session
 					.prepare(INSERT_RECORD_IN_CACHE);

@@ -2,6 +2,10 @@ package com.impetus.eej2.cache.driver;
 
 import java.util.Date;
 
+import org.apache.log4j.PropertyConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
 import com.impetus.eej2.cache.service.EIECacheServiceImpl;
@@ -9,7 +13,11 @@ import com.impetus.eej2.cache.service.IEIECacheService;
 
 public class CacheDriver {
 
+	//constant logger
+	private static final Logger logger = LoggerFactory.getLogger(CacheDriver.class);
+	
 	public static void main(String args[]) {
+		logger.info("inside main method of CacheDriver");
 		IEIECacheService cacheService = new EIECacheServiceImpl();
 		/*readCache(cacheService);*/
 		
@@ -18,6 +26,7 @@ public class CacheDriver {
 	}
 
 	private static void writeCache(IEIECacheService cacheService) {
+		logger.info("inside writeCache method of CacheDriver");
 		EIEResponse eieResponse=new EIEResponse();
 		eieResponse.setCc("CC");
 		eieResponse.setCrDate(new Date());
@@ -42,6 +51,7 @@ public class CacheDriver {
 	}
 
 	private static void readCache(IEIECacheService cacheService) {
+		logger.info("inside readCache method of CacheDriver");
 		EIERequest eieRequest = new EIERequest();
 		eieRequest.setCC("30");
 		eieRequest.setTN("6977413285");
@@ -59,6 +69,12 @@ public class CacheDriver {
 				+ eieResponse.getReqType() + "\n" + "STATUS "
 				+ eieResponse.getStatus() + "\n" + "CREATED_DT "
 				+ eieResponse.getCrDate());
+	}
+	
+	//configure the log4j file
+	static
+	{
+		PropertyConfigurator.configure("src\\log4j.properties");
 	}
 
 }
