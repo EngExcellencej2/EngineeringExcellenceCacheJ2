@@ -16,7 +16,7 @@ public interface IEIECacheDao {
 	 * </p>
 	 * 
 	 * @param eieReq
-	 * @return
+	 * @return the <code>EIEReponse to service Layer
 	 */
 	public EIEResponse getEIEResponse(EIERequest eieReq);
 
@@ -27,7 +27,7 @@ public interface IEIECacheDao {
 	 * </p>
 	 * 
 	 * @param eieRes
-	 * @return
+	 * @return the output in <code>boolean</code> format to service layer
 	 */
 	public Boolean addEIEExternalReponse(EIEResponse eieRes);
 }
