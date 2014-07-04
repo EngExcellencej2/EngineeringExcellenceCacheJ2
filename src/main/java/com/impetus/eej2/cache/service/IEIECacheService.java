@@ -17,7 +17,7 @@ public interface IEIECacheService {
 	 * </p>
 	 * 
 	 * @param eieReq
-	 * @return
+	 * @return the <code>EIEResponse</code> to EIE Engine
 	 */
 	public EIEResponse getEIEresponse(EIERequest EieRequest);
 
@@ -28,7 +28,8 @@ public interface IEIECacheService {
 	 * </p>
 	 * 
 	 * @param eieRes
-	 * @return
+	 * @return output in <code>boolean</code> format to EIE Engine
+	 * 
 	 */
 	public Boolean addEIEexternalResponse(EIEResponse EieResponse);
 
