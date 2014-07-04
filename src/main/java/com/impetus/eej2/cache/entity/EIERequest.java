@@ -1,5 +1,12 @@
 package com.impetus.eej2.cache.entity;
 
+/**
+ * @author hitesh.pawar
+ *         <p>
+ *         An entry to represent input request to EIE Cache utils
+ *         </p>
+ * @version 0.1
+ */
 public class EIERequest {
 
 	private String TN;
