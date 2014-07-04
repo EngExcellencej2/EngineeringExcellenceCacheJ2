@@ -40,8 +40,7 @@ public enum CassandraConnectionUtils {
 	 * <p>
 	 * Return singleton session object
 	 * </p>
-	 * 
-	 * @return
+	 * @return the singleton session <code>Session</code> instance
 	 */
 	public Session getSession() {
 		return session;
