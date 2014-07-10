@@ -4,6 +4,8 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.7
 version = '1.0'
 jar {
+    baseName = 'EIECacheUtils'
+	version  = '0.1'
     manifest {
         attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
     }
