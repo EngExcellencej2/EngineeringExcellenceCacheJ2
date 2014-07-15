@@ -8,17 +8,6 @@ package com.impetus.eej2.cache.entity;
  * @version 0.1
  */
 public class EIERequest {
-	
-	/**
-	 * <p>
-	 * Returns <code>EIERequest</code> object attributes.
-	 * </p>
-	 */
-	public String toString(){
-		StringBuilder sb = new StringBuilder("EIE Request [");
-		sb.append("TN:"+TN+"CC:"+CC+"]");
-		return sb.toString();
-	}
 
 	private String TN;
 
