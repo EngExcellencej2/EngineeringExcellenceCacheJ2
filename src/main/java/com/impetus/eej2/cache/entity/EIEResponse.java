@@ -48,7 +48,18 @@ public class EIEResponse {
 	public String getId() {
 		return id;
 	}
-
+    
+	/**
+	 * <p>
+	 * Returns <code>EIEResponse</code> object attributes.
+	 * </p>
+	 */
+	public String toString(){
+		StringBuilder sb = new StringBuilder("EIE Response [");
+		sb.append("ID:"+id+"CC:"+cc+"TN:"+TN+"MNC:"+MNC+"MCC"+MCC+"SPID:"+SPID+"Created Date:"+crDate+"Request Type:"+reqType+"Response String:"+resString+
+				"Status:"+status+"IMSI:"+IMSI+"HLR:"+HLR+"MSC:"+MSC+"TN_TYPE:"+TN_Type+"Supplier Type:"+supplierType+"Supplier ID:"+supplierId+"]");
+		return sb.toString();
+	}
 	public void setId(String id) {
 		this.id = id;
 	}
