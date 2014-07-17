@@ -1,5 +1,8 @@
 package com.impetus.eej2.cache.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
 
@@ -25,25 +28,32 @@ public enum CassandraConnectionUtils {
 
 	CONN;
 
-	private static final Session session;
+	private   Session session;
 
-	private static final Cluster cluster;
-
-	private static final String NODE = "";
-
-	static {
-		cluster = Cluster.builder().addContactPoint("localhost").build();
-		session = cluster.connect();
-	}
+	private   Cluster cluster;
+	
+	private String Node;
 
 	/**
 	 * <p>
 	 * Return singleton session object
 	 * </p>
-	 * @return the singleton session <code>Session</code> instance
+	 * 
+	 * @return
 	 */
 	public Session getSession() {
+		PropertyReader propertyReader =  new PropertyReader();
+		Map< String, String> hashMap = new HashMap<>();
+		hashMap = propertyReader.printThemAll();
+		Node = hashMap.get("NODE");
+		System.out.println(Node);
+		cluster = Cluster.builder().addContactPoint(Node).build();
+		session = cluster.connect();
 		return session;
 	}
+	
+	
+	
+	
 
 }
