@@ -44,6 +44,16 @@ public class EIEResponse {
 	private String supplierType;
 
 	private Long supplierId;
+	
+	private int TTL;
+
+	public int getTTL() {
+		return TTL;
+	}
+
+	public void setTTL(int tTL) {
+		TTL = tTL;
+	}
 
 	public String getId() {
 		return id;

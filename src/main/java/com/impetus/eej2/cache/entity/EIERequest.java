@@ -23,6 +23,16 @@ public class EIERequest {
 	private String TN;
 
 	private String CC;
+	
+	private int TTL;
+
+	public int getTTL() {
+		return TTL;
+	}
+
+	public void setTTL(int tTL) {
+		TTL = tTL;
+	}
 
 	public String getTN() {
 		return TN;
