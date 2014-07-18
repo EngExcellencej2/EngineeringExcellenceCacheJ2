@@ -49,7 +49,7 @@ public class EIECacheDaoImpl implements IEIECacheDao {
             for(Row row : rowSet)
             {
             	Date createdDate = row.getDate("created_date");
-            	Integer diff = (int) ((currentDate.getTime()-createdDate.getTime())/1000);
+            	int diff = (int) ((currentDate.getTime()-createdDate.getTime())/1000);
             	
             	if(diff<=eieReq.getTTL())
             	{
