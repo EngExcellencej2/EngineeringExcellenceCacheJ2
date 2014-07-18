@@ -2,40 +2,54 @@ package com.impetus.eej2.cache.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.impetus.eej2.cache.exception.EieCacheException;
 
-public class PropertyReader {
-	public static String node;
-	public String ip;
-	Map<String, String> map = new HashMap<String, String>();
-
-	public Map printThemAll() {
+/**
+ * @author sharad.agrawal
+ * <p>
+ * Loads EIECache application configuration properties. The property configuration is loaded once in the application.
+ * Once loaded by any thread, other threads can simply use previously loaded Properties.
+ * </p>
+ * @version 0.2
+ */
+ class PropertyReader {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PropertyReader.class);
+	
+	//Class has got no instance methods so suppress instance creation by private Constructor
+	private PropertyReader(){
+		
+	}
+	
+	private static Properties prop;
+	
+	/**
+	 * <p>
+	 * Load EIE Cache Configuration from properties file. 
+	 * </p>
+	 * @return
+	 */
+	public static synchronized Properties loadProperties() {
+		if(prop!=null){
+			logger.info("EIE configuration already loaded");
+			return prop;
+		}
+		logger.info("Load EIE Cache Configuration from properties file");
 		Properties prop = new Properties();
 		InputStream input = null;
-
 		try {
-
 			String filename = "ipconfig.properties";
-			input = getClass().getClassLoader().getResourceAsStream(filename);
+			input = PropertyReader.class.getClassLoader().getResourceAsStream(filename);
 			if (input == null) {
-				System.out.println("Sorry, unable to find " + filename);
-				return null;
+				throw new EieCacheException("Not able to initialize input stream, "+filename+" not found");
 			}
-
 			prop.load(input);
-
-			Enumeration<?> e = prop.propertyNames();
-			while (e.hasMoreElements()) {
-				String key = (String) e.nextElement();
-				String value = prop.getProperty(key);
-				map.put(key, value);
-			}
-
+			logger.debug("Configuration successfuly loaded from properties file::"+prop);
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			throw new EieCacheException("Exception while reading Property file:ipconfig.properties"+ex);
 		} finally {
 			if (input != null) {
 				try {
@@ -45,31 +59,7 @@ public class PropertyReader {
 				}
 			}
 		}
-		return map;
-	}
-
-	public String getNode() {
-		return node;
-	}
-
-	public void setNode(String node) {
-		this.node = node;
-	}
-
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public Map<String, String> getMap() {
-		return map;
-	}
-
-	public void setMap(Map<String, String> map) {
-		this.map = map;
+		return prop;
 	}
 
 }
