@@ -1,13 +1,16 @@
 package com.impetus.eej2.cache.utils;
 
 import java.util.Properties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.HostDistance;
 import com.datastax.driver.core.Metadata;
 import com.datastax.driver.core.PoolingOptions;
+import com.datastax.driver.core.ProtocolOptions;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy;
 import com.datastax.driver.core.policies.FallthroughRetryPolicy;
@@ -73,6 +76,7 @@ public enum CassandraConnectionUtils {
 			builder.withLoadBalancingPolicy(new DCAwareRoundRobinPolicy(localDC));
 			builder.withRetryPolicy(FallthroughRetryPolicy.INSTANCE);
 			cluster = builder.build();
+			cluster.getConfiguration().getProtocolOptions().setCompression(ProtocolOptions.Compression.LZ4);
 			cluster.init();
 			session = cluster.connect();
 		}
