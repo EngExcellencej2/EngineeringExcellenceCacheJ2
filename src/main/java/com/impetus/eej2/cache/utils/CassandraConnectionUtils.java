@@ -44,14 +44,8 @@ public enum CassandraConnectionUtils {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CassandraConnectionUtils.class);
 
-	/**
-	 * <p>
-	 * Initialize Cassandra Cluster environment from Property Configuration.
-	 * </p>
-	 * 
-	 * @return
-	 */
-	public static void initializeClusterEnv(){
+	
+	static{
 		logger.info("Initialize EIE Cache Cassandra Cluster environment");
 		try{
 			Properties prop = PropertyReader.loadProperties();
