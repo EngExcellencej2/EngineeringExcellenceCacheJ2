@@ -54,8 +54,8 @@ public enum CassandraConnectionUtils {
 			String localDC = prop.getProperty(IEIECacheConstants.LOCAL_DC_NAME);
 			String nodes = prop.getProperty(IEIECacheConstants.NODES);
 			String[] nodesList = nodes.split(",");
-			int coreConnPerHost = Integer.parseInt(IEIECacheConstants.CORE_CONN_PER_HOST);
-			int maxConnPerHost =  Integer.parseInt(IEIECacheConstants.MAX_CONN_PER_HOST);
+			int coreConnPerHost = Integer.parseInt(prop.getProperty(IEIECacheConstants.CORE_CONN_PER_HOST));
+			int maxConnPerHost =  Integer.parseInt(prop.getProperty(IEIECacheConstants.MAX_CONN_PER_HOST));
 			int maxSimultaneousReq = Integer.parseInt(prop.getProperty(IEIECacheConstants.MAX_SIMULTANEOUS_REQ_PER_CONN_THRESHHOLD));
 			int minSimultaneousReq = Integer.parseInt(prop.getProperty(IEIECacheConstants.MIN_SIMULTANEOUS_REQ_PER_CONN_THRESHHOLD));
 			builder.addContactPoints(nodesList);
