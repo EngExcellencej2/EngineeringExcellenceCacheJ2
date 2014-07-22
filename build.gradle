@@ -5,6 +5,9 @@ sourceCompatibility = 1.7
 version = '1.0'
 jar {
     baseName = 'EIECacheUtils'
+    from('src/main/java') {
+    include '*.properties'
+                          }
 	version  = '0.1'
     manifest {
         attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
