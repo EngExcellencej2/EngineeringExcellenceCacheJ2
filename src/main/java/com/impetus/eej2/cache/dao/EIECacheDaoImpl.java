@@ -66,6 +66,8 @@ public class EIECacheDaoImpl implements IEIECacheDao {
     				eieRes.setHLR(row.getLong("hlr"));
     				eieRes.setMSC(row.getLong("msc"));
     				eieRes.setTN_Type(row.getString("tn_type"));
+    				eieRes.setSupplierId(row.getLong("supplier_id"));
+    				eieRes.setSupplierType(row.getString("supplier_type"));
     				break;	
             	}
             	else
