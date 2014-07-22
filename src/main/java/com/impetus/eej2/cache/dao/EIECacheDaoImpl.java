@@ -86,7 +86,8 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 					EieCacheErrorCodes.UNSUCCESSFULL_READ.getErrorMessage(),
 					exception.getMessage());
 		} finally {
-			session.close();
+			//Do not close our singleton session.
+			//session.close();
 		}
 		return eieRes;
 	}
@@ -125,7 +126,8 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 			exception.printStackTrace();
 			return false;
 		} finally {
-			session.close();
+			//Do not close our singleton session.
+			//session.close();
 		}
 
 	}
