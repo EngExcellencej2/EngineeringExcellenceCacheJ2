@@ -39,15 +39,8 @@ public class EIECacheServiceImplTest {
 		eieCacheServiceImpl = new EIECacheServiceImpl();
 	}
 
-	@Test
-	public void testGetEIEresponse() {
-
-		eieRequest = new EIERequest();
-		eieRequest.setCC("30");
-		eieRequest.setTN("6977413285");
-		eieResponse = eieCacheServiceImpl.getEIEresponse(eieRequest);
-		Assert.assertNotNull(eieResponse);
-	}
+	
+	
 
 	@Test
 	public void testAddEIEexternalResponse() {
@@ -69,8 +62,22 @@ public class EIECacheServiceImplTest {
 		eieResponse.setSupplierType(supplierType);
 		eieResponse.setTN(TN);
 		eieResponse.setTN_Type(tN_Type);
+		eieResponse.setTTL(300);
 		response = eieCacheServiceImpl.addEIEexternalResponse(eieResponse);
 		Assert.assertEquals(true, response);
 	}
 
+	
+	
+	@Test
+	public void testGetEIEresponse() {
+
+		eieRequest = new EIERequest();
+		eieRequest.setCC(CC);
+		eieRequest.setTN(TN);
+		eieRequest.setTTL(200);
+		eieResponse = eieCacheServiceImpl.getEIEresponse(eieRequest);
+		Assert.assertNotNull(eieResponse);
+	}
+	
 }
