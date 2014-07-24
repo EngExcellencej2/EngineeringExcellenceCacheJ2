@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.datastax.driver.core.BoundStatement;
+import com.datastax.driver.core.ConsistencyLevel;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
@@ -29,7 +30,7 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"+"USING TTL ?";
 	
 	Session session = CassandraConnectionUtils.CONN.getSession();
-
+	
 	@Override
 	public EIEResponse getEIEResponse(EIERequest eieReq) {
 		logger.info("inside getEIEResponse of EIECacheDaoImpl {}",eieReq);
@@ -39,20 +40,20 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 		EIEResponse eieRes = null;
 		try {
 			if (session != null) {
-				preparedStatement = session.prepare(GET_RECORD_FROM_CACHE);
+				preparedStatement = session.prepare(GET_RECORD_FROM_CACHE).setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
 			}
-
+			
 			BoundStatement boundStatement = preparedStatement.bind(rowID);
 			rowSet = session.execute(boundStatement);
 			Date currentDate = new Date();
 			
-            for(Row row : rowSet)
-            {
+			for(Row row : rowSet)
+            {	
             	Date createdDate = row.getDate("created_date");
             	int diff = (int) ((currentDate.getTime()-createdDate.getTime())/1000);
             	
             	if(diff<=eieReq.getTTL())
-            	{
+            	{	
             		eieRes = new EIEResponse();
     				eieRes.setId(row.getString("row_id"));
     				eieRes.setMNC(row.getString("mnc"));
@@ -111,7 +112,7 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 		logger.info("inside addEIEExternalReponse of EIECacheDaoImpl {}",eieRes);
 		try {
 			PreparedStatement preparedStatement = session
-					.prepare(INSERT_RECORD_IN_CACHE);
+					.prepare(INSERT_RECORD_IN_CACHE).setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
 			BoundStatement boundStatement = preparedStatement.bind(
 					eieRes.getCc()+"_" + eieRes.getTN(), eieRes.getMNC(),
 					eieRes.getMCC(), eieRes.getSPID(), new Date(),
