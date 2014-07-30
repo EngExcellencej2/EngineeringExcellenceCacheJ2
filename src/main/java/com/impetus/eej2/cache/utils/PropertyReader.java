@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.impetus.eej2.cache.exception.EieCacheException;
 
 /**
- * @author sharad.agrawal
+ * @author hitesh.pawar
  * <p>
  * Loads EIECache application configuration properties. The property configuration is loaded once in the application.
  * Once loaded by any thread, other threads can simply use previously loaded Properties.
@@ -28,7 +28,7 @@ import com.impetus.eej2.cache.exception.EieCacheException;
 	
 	/**
 	 * <p>
-	 * Load EIE Cache Configuration from properties file. 
+	 * Load EIE Cache Configuration from properties file.This is one time operation.
 	 * </p>
 	 * @return
 	 */

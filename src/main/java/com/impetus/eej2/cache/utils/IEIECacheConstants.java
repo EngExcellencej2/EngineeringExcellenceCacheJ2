@@ -1,5 +1,12 @@
 package com.impetus.eej2.cache.utils;
 
+/**
+ * @author hitesh.pawar
+ * <p>
+ * Defines EIE Cache Utils Constants.
+ * </p>
+ *
+ */
 public interface IEIECacheConstants {
 
 	public static final String LOCAL_DC_NAME = "LOCAL_DC_NAME";

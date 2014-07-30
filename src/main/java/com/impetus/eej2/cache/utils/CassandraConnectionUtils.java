@@ -16,25 +16,26 @@ import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy;
 import com.datastax.driver.core.policies.FallthroughRetryPolicy;
 import com.impetus.eej2.cache.exception.EieCacheException;
 
+/**
+ * @author hitesh.pawar
+ *         <p>
+ *         A Cassandra connection utility to get Session object.The utility
+ *         class is singleton in nature. Implemented through enum to counter
+ *         singleton breaking scenarios.
+ *         </p>
+ *         <p>
+ *         As per driver specification session is thread-safe and one
+ *         session instance is enough for an application. The session
+ *         maintains multiple connections to the cluster nodes, provides
+ *         policies to choose which node to use for each query (round-robin
+ *         on all nodes of the cluster by default), and handles retries for
+ *         failed queries when it makes sense.
+ *         </p>
+ * @version 0.1
+ */
+
 public enum CassandraConnectionUtils {
 
-	/**
-	 * @author hitesh.pawar
-	 *         <p>
-	 *         A Cassandra connection utility to get Session object.The utility
-	 *         class is singleton in nature. Implemented through enum to counter
-	 *         singleton breaking scenarios.
-	 *         </p>
-	 *         <p>
-	 *         As per driver specification session is thread-safe and one
-	 *         session instance is enough for an application. The session
-	 *         maintains multiple connections to the cluster nodes, provides
-	 *         policies to choose which node to use for each query (round-robin
-	 *         on all nodes of the cluster by default), and handles retries for
-	 *         failed queries when it makes sense.
-	 *         </p>
-	 * @version 0.1
-	 */
 
 	CONN;
 
