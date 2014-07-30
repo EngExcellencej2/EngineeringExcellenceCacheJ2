@@ -1,7 +1,18 @@
 package com.impetus.eej2.cache.exception;
 
+/**
+ * @author sharad.agarwal
+ * <p>
+ * Exception Framework For EIE Cache Utils.
+ * </p>
+ *
+ */
 public class EieCacheException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EieCacheErrorCodes errorCode;
 	private String errorMessage;
 	private String actualerror;
@@ -40,7 +51,15 @@ public class EieCacheException extends RuntimeException {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
-
+    
+	/**
+	 * <p>
+	 * Constructor for EieCacheException. Sets error code, error message and actual error for the Run Time exception.
+	 * </p>
+	 * @param errorCode
+	 * @param errorMessage
+	 * @param actualerror
+	 */
 	public EieCacheException(EieCacheErrorCodes errorCode, String errorMessage,
 			String actualerror) {
 		super();

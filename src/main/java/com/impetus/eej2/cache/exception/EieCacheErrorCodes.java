@@ -1,5 +1,12 @@
 package com.impetus.eej2.cache.exception;
 
+/**
+ * @author sharad.agarwal
+ * <p>
+ * Defines Error codes for EIE Cache Utils
+ * </p>
+ *
+ */
 public enum EieCacheErrorCodes {
 	UNSUCCESSFULL_READ("unsuccesfullRead",
 			"not able to read data from database"), UNSUCCESSFULL_WRITE(
@@ -7,7 +14,10 @@ public enum EieCacheErrorCodes {
 
 	private String errorCode;
 	private String errorMessage;
-
+    
+	/**
+	 * @param errorCode
+	 */
 	private EieCacheErrorCodes(String errorCode) {
 		this.errorCode = errorCode;
 	}
