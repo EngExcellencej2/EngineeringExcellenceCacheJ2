@@ -22,4 +22,14 @@ public class DAOCreationFactory {
 		return null;
 	}
 
+	/**
+	 * private constructor
+	 */
+	private DAOCreationFactory() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
 }

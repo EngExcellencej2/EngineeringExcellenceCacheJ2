@@ -63,17 +63,17 @@ class PropertyReader {
 			prop.load(input);
 			logger.debug("Configuration successfuly loaded from properties file::"
 					+ prop);
-		} catch (IOException ex) {
-
+		} catch (IOException ioException) {
+			logger.error("Exception while reading Property file:ipconfig.properties",ioException);
 			throw new EIECacheRunTimeException(
 					"Exception while reading Property file:ipconfig.properties"
-							+ ex);
+							+ ioException);
 		} finally {
 			if (input != null) {
 				try {
 					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
+				} catch (IOException ioException) {
+					logger.error("Exception while closing the resources",ioException);
 				}
 			}
 		}

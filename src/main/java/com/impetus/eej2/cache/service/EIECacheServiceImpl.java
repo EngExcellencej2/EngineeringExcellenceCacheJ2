@@ -38,15 +38,15 @@ public class EIECacheServiceImpl implements IEIECacheService {
 	 * Inits the.
 	 */
 	private void init(String driverType) {
-		
+
 		ieieCacheDao = DAOCreationFactory.getDaoObject(driverType);
 	}
 
-	public EIEResponse getEIEresponse(EIERequest eieReq) throws EIECacheCheckedException
-			 {
+	public EIEResponse getEIEresponse(EIERequest eieReq)
+			throws EIECacheCheckedException {
 		logger.info("inside getEIEresponse of  EIECacheServiceImpl {}", eieReq);
 		EIEResponse eieResponse = null;
-				eieResponse = ieieCacheDao.getEIEResponse(eieReq);
+		eieResponse = ieieCacheDao.getEIEResponse(eieReq);
 		return eieResponse;
 	}
 

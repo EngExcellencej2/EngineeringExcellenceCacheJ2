@@ -49,10 +49,10 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 		EIEResponse eieRes = new EIEResponse();
 		eieRes.setIsDataFound(false);
 		eieRes.setStatusMessage("record is not found for input TN and CC");
-	
+
 		try {
 			if (session != null) {
-				
+
 				preparedStatement = session.prepare(GET_RECORD_FROM_CACHE)
 						.setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
 				preparedStatement.enableTracing();
@@ -76,7 +76,8 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 						eieRes.setSpId(row.getString("spid"));
 						eieRes.setCreatedDate(row.getDate("created_date"));
 						eieRes.setRequestType(row.getLong("request_type"));
-						eieRes.setResponseString(row.getString("response_string"));
+						eieRes.setResponseString(row
+								.getString("response_string"));
 						eieRes.setStatus(row.getLong("status"));
 						eieRes.setImsi(row.getLong("imsi"));
 						eieRes.setHlr(row.getLong("hlr"));
@@ -94,15 +95,14 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 				}
 
 			} else {
-				logger.error("session is null found",eieReq);
+				logger.error("session is null found", eieReq);
 				throw new EIECacheCheckedException(
 						EIECacheErrorCodes.NULL_SEESION,
 						"session is null found");
 			}
-		} 
-		catch(Exception exception)
-		{
-			ExceptionHandlerTemplate.handleException(exception, eieReq.toString());
+		} catch (Exception exception) {
+			ExceptionHandlerTemplate.handleException(exception,
+					eieReq.toString());
 		}
 		return eieRes;
 	}
@@ -116,49 +116,44 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 	 * @return rowId for Cassandra record
 	 */
 	private String getRowID(EIERequest eieReq) {
-		String src = eieReq.getCountryCode() + "_" + eieReq.getTelephoneNumber();
-		return src;
+		return eieReq.getCountryCode() + "_"
+				+ eieReq.getTelephoneNumber();
 	}
 
 	@Override
 	public Boolean addEIEExternalReponse(EIEResponse eieRes)
 			throws EIECacheCheckedException {
-		// Session session = CassandraConnectionUtils.CONN.getSession();
 		logger.info("inside addEIEExternalReponse of EIECacheDaoImpl {}",
 				eieRes);
 		Boolean writeflag = false;
 		try {
-			if(session!=null)
-			{
-			PreparedStatement preparedStatement = session.prepare(
-					INSERT_RECORD_IN_CACHE).setConsistencyLevel(
-					ConsistencyLevel.LOCAL_ONE);
-			preparedStatement.enableTracing();
-			BoundStatement boundStatement = preparedStatement.bind(
-					eieRes.getCountryCode() + "_" + eieRes.getTelephoneNumber(), eieRes.getMnc(),
-					eieRes.getMcc(), eieRes.getSpId(), new Date(),
-					eieRes.getRequestType(), eieRes.getResponseString(),
-					eieRes.getStatus(), eieRes.getImsi(), eieRes.getHlr(),
-					eieRes.getMsc(), eieRes.getTnType(),
-					eieRes.getSupplierId(), eieRes.getSupplierType(),
-					eieRes.getTimeToLive());
-			session.execute(boundStatement);
-			writeflag = true;
-			
-			}
-			else
-			{
-				logger.error("session is  null found",eieRes);
+			if (session != null) {
+				PreparedStatement preparedStatement = session.prepare(
+						INSERT_RECORD_IN_CACHE).setConsistencyLevel(
+						ConsistencyLevel.LOCAL_ONE);
+				preparedStatement.enableTracing();
+				BoundStatement boundStatement = preparedStatement.bind(
+						eieRes.getCountryCode() + "_"
+								+ eieRes.getTelephoneNumber(), eieRes.getMnc(),
+						eieRes.getMcc(), eieRes.getSpId(), new Date(),
+						eieRes.getRequestType(), eieRes.getResponseString(),
+						eieRes.getStatus(), eieRes.getImsi(), eieRes.getHlr(),
+						eieRes.getMsc(), eieRes.getTnType(),
+						eieRes.getSupplierId(), eieRes.getSupplierType(),
+						eieRes.getTimeToLive());
+				session.execute(boundStatement);
+				writeflag = true;
+
+			} else {
+				logger.error("session is  null found", eieRes);
 				throw new EIECacheCheckedException(
-						EIECacheErrorCodes.NULL_SEESION,
-						"session  is null");
+						EIECacheErrorCodes.NULL_SEESION, "session  is null");
 			}
-		} 
-		catch(Exception exception)
-		{
-			ExceptionHandlerTemplate.handleException(exception, eieRes.toString());
+		} catch (Exception exception) {
+			ExceptionHandlerTemplate.handleException(exception,
+					eieRes.toString());
 		}
-		return  writeflag; 
+		return writeflag;
 
 	}
 

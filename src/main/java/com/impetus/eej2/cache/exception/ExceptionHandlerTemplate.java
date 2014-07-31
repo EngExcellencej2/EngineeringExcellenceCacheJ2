@@ -23,6 +23,17 @@ public class ExceptionHandlerTemplate {
 	private static final Logger logger = LoggerFactory
 			.getLogger(ExceptionHandlerTemplate.class);
 
+	
+    /**
+     * private constructor
+     */
+	private ExceptionHandlerTemplate() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	/**
 	 * 
 	 * @param exception
