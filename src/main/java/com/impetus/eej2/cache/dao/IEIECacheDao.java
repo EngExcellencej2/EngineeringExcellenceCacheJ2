@@ -6,12 +6,12 @@ import com.impetus.eej2.cache.exception.EIECacheCheckedException;
 
 /**
  * <p>
- * A Dao utility to fetch cache records from Cassandra Cluster
+ * A Dao utility to fetch cache records from Cassandra Cluster. The implementation DAO will be Cassandra Driver specific.
  * </p>
  * @author perwaiz.ali
  * @version 1.0
  */
-public interface IEIECacheDao {
+public interface IEIECacheDAO {
 
 	/**
 	 * <p>

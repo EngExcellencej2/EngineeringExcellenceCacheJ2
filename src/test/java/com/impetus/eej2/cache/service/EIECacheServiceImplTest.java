@@ -12,11 +12,11 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.impetus.eej2.cache.dao.EIECacheDaoImpl;
+import com.impetus.eej2.cache.dao.EIECacheDataStaxDAOImpl;
 import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
 import com.impetus.eej2.cache.exception.EIECacheCheckedException;
-import com.impetus.eej2.cache.factory.DaoCreationFactory;
+import com.impetus.eej2.cache.factory.DAOCreationFactory;
 import com.impetus.eej2.cache.service.EIECacheServiceImpl;
 
 /**
@@ -27,7 +27,7 @@ import com.impetus.eej2.cache.service.EIECacheServiceImpl;
  */
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(DaoCreationFactory.class)
+@PrepareForTest(DAOCreationFactory.class)
 public class EIECacheServiceImplTest {
 	
 	
@@ -42,7 +42,7 @@ public class EIECacheServiceImplTest {
 	EIEResponse eieResponse = null;
 	EIECacheServiceImpl eieCacheServiceImpl = null;
 	@Mock
-	EIECacheDaoImpl eieCacheDaoImplMock;
+	EIECacheDataStaxDAOImpl eieCacheDaoImplMock;
 	
 
 	/**
@@ -51,8 +51,8 @@ public class EIECacheServiceImplTest {
 	@Before
 	public void createObject() {
 		MockitoAnnotations.initMocks(this);
-		PowerMockito.mockStatic(DaoCreationFactory.class);
-		Mockito.when(DaoCreationFactory.getDaoObject(Matchers.any(String.class))).thenReturn(eieCacheDaoImplMock);
+		PowerMockito.mockStatic(DAOCreationFactory.class);
+		Mockito.when(DAOCreationFactory.getDaoObject(Matchers.any(String.class))).thenReturn(eieCacheDaoImplMock);
 		eieCacheServiceImpl = new EIECacheServiceImpl("Datastax");
 	}
 	

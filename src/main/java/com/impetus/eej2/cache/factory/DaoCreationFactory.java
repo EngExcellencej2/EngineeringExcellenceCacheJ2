@@ -1,12 +1,13 @@
 package com.impetus.eej2.cache.factory;
 
-import com.impetus.eej2.cache.dao.EIECacheDaoImpl;
-import com.impetus.eej2.cache.dao.IEIECacheDao;
+import com.impetus.eej2.cache.dao.EIECacheDataStaxDAOImpl;
+import com.impetus.eej2.cache.dao.IEIECacheDAO;
+import com.impetus.eej2.cache.utils.IEIECacheConstants;
 
 /**
  * A factory for creating DaoCreation objects.
  */
-public class DaoCreationFactory {
+public class DAOCreationFactory {
 
 	/**
 	 * Gets the dao object.
@@ -14,9 +15,9 @@ public class DaoCreationFactory {
 	 * @param driverType the driver type
 	 * @return the dao object
 	 */
-	public static IEIECacheDao getDaoObject(String driverType) {
-		if ("Datastax".equals(driverType)) {
-			return new EIECacheDaoImpl();
+	public static IEIECacheDAO getDaoObject(String driverType) {
+		if (IEIECacheConstants.DATA_STAX_DRIVER.equals(driverType)) {
+			return new EIECacheDataStaxDAOImpl();
 		}
 		return null;
 	}

@@ -46,6 +46,15 @@ public interface IEIECacheConstants {
 	 */
 	public static final String MAX_SIMULTANEOUS_REQ_PER_CONN_THRESHHOLD = "MAX_SIMULTANEOUS_REQ_PER_CONN_THRESHHOLD";
 	
+	/**
+	 * <p>
+	 * Constant for Data Stax Cassandra Driver
+	 * </p>
+	 */
+	public static final String DATA_STAX_DRIVER = "DATASTAX";
+	
+	//Add constants for other Cassandra Driver like Hector etc.
+	
 	
 	/**
 	 * <p>
