@@ -1,16 +1,32 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'distribution'
+
+def projectName = 'EIECacheUtils'
+def propFileLocation = 'src/main/java/ipconfig.properties'
+def releaseNotesLocation = 'doc/Release_Notes_EIE_Cache_Utils 1.0.pdf' 
 
 sourceCompatibility = 1.7
 version = '1.0'
 jar {
-    baseName = 'EIECacheUtils'
+    baseName = projectName
     from('src/main/java') {
     include '*.properties'
                           }
 	version  = '0.1'
     manifest {
         attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+    }
+}
+
+distributions {
+    main {
+        baseName = projectName
+        contents {
+            from {'build/libs/EIECacheUtils-0.1.jar'}
+            from {propFileLocation}
+            from {releaseNotesLocation}
+        }
     }
 }
 
