@@ -106,10 +106,9 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 	/**
 	 * <p>
 	 * Get unique hash Code as Row Id for Cassandra Column Family.
-	 * </p>
-	 * 
+	 * </p> 
 	 * @param eieReq
-	 * @return
+	 * @return rowId for Cassandra record
 	 */
 	private String getRowID(EIERequest eieReq) {
 		String src = eieReq.getCC() + "_" + eieReq.getTN();
