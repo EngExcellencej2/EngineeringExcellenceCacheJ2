@@ -4,6 +4,9 @@ import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
 
 /**
+ * <p>
+ * A Dao utility to fetch cache records from Cassandra Cluster
+ * </p>
  * @author perwaiz.ali
  * @version 1.0
  */
@@ -12,7 +15,8 @@ public interface IEIECacheDao {
 	/**
 	 * <p>
 	 * Gets the response from the Cassandra database based on the input request.
-	 * In case data in not found in the database Exception is thrown.
+	 * In case data in not found in the database null response is returned.
+	 * When any exception is thrown while fetching data, the exception is wrapped up in <code>EieCacheException</code>
 	 * </p>
 	 * 
 	 * @param eieReq

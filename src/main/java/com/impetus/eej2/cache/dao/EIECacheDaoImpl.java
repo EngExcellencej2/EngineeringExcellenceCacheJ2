@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.ConsistencyLevel;
+import com.datastax.driver.core.ExecutionInfo;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
@@ -18,19 +19,23 @@ import com.impetus.eej2.cache.exception.EieCacheException;
 import com.impetus.eej2.cache.utils.CassandraConnectionUtils;
 
 /**
+ * <p>
+ * An implementation of <code>IEIECacheDao</code> to fetch records from Cassandra Cluster.
+ * </p>
  * @author perwaiz.ali
  */
 
 public class EIECacheDaoImpl implements IEIECacheDao {
-	private static final Logger logger = LoggerFactory.getLogger(EIECacheDaoImpl.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(EIECacheDaoImpl.class);
 
 	private static final String GET_RECORD_FROM_CACHE = "SELECT * from eie_cache_db.eie_proxydbcache  where row_id = ?";
 	private static final String INSERT_RECORD_IN_CACHE = "INSERT INTO eie_cache_db.eie_proxydbcache "
 			+ "(row_id,mnc,mcc,spid,created_date,request_type,response_string,status,imsi,hlr,msc,tn_type,supplier_id,supplier_type)"
-			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"+"USING TTL ?";
-	
+			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)" + "USING TTL ?";
+
 	Session session = CassandraConnectionUtils.CONN.getSession();
-	
+
 	@Override
 	public EIEResponse getEIEResponse(EIERequest eieReq) {
 		logger.info("inside getEIEResponse of EIECacheDaoImpl {}",eieReq);
@@ -41,10 +46,15 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 		try {
 			if (session != null) {
 				preparedStatement = session.prepare(GET_RECORD_FROM_CACHE).setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
+				preparedStatement.enableTracing();
 			}
 			
 			BoundStatement boundStatement = preparedStatement.bind(rowID);
 			rowSet = session.execute(boundStatement);
+			ExecutionInfo executionInfo=rowSet.getExecutionInfo();
+			logger.info("QUERY TRACE"+executionInfo.getQueryTrace());
+			logger.info("QUERIED HOST"+executionInfo.getQueriedHost());
+			logger.info("TRIED HOST"+executionInfo.getTriedHosts());
 			Date currentDate = new Date();
 			
 			for(Row row : rowSet)
@@ -108,18 +118,23 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 
 	@Override
 	public Boolean addEIEExternalReponse(EIEResponse eieRes) {
-	//	Session session = CassandraConnectionUtils.CONN.getSession();
-		logger.info("inside addEIEExternalReponse of EIECacheDaoImpl {}",eieRes);
+		// Session session = CassandraConnectionUtils.CONN.getSession();
+		logger.info("inside addEIEExternalReponse of EIECacheDaoImpl {}",
+				eieRes);
 		try {
-			PreparedStatement preparedStatement = session
-					.prepare(INSERT_RECORD_IN_CACHE).setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
+			PreparedStatement preparedStatement = session.prepare(
+					INSERT_RECORD_IN_CACHE).setConsistencyLevel(
+					ConsistencyLevel.LOCAL_ONE);
+			preparedStatement = session.prepare(GET_RECORD_FROM_CACHE).setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
+			preparedStatement.enableTracing();
 			BoundStatement boundStatement = preparedStatement.bind(
-					eieRes.getCc()+"_" + eieRes.getTN(), eieRes.getMNC(),
+					eieRes.getCc() + "_" + eieRes.getTN(), eieRes.getMNC(),
 					eieRes.getMCC(), eieRes.getSPID(), new Date(),
 					eieRes.getReqType(), eieRes.getResString(),
 					eieRes.getStatus(), eieRes.getIMSI(), eieRes.getHLR(),
 					eieRes.getMSC(), eieRes.getTN_Type(),
-					eieRes.getSupplierId(), eieRes.getSupplierType(),eieRes.getTTL());
+					eieRes.getSupplierId(), eieRes.getSupplierType(),
+					eieRes.getTTL());
 			session.execute(boundStatement);
 			return true;
 
@@ -127,8 +142,8 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 			exception.printStackTrace();
 			return false;
 		} finally {
-			//Do not close our singleton session.
-			//session.close();
+			// Do not close our singleton session.
+			// session.close();
 		}
 
 	}
