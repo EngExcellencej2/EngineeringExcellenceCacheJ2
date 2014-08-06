@@ -8,11 +8,11 @@ import org.slf4j.LoggerFactory;
 import com.impetus.eej2.cache.exception.EieCacheException;
 
 /**
- * @author hitesh.pawar
  * <p>
  * Loads EIECache application configuration properties. The property configuration is loaded once in the application.
  * Once loaded by any thread, other threads can simply use previously loaded Properties.
  * </p>
+ * @author hitesh.pawar
  * @version 0.2
  */
  class PropertyReader {
@@ -33,7 +33,7 @@ import com.impetus.eej2.cache.exception.EieCacheException;
 	 * </p>
 	 * @return
 	 */
-	public static synchronized Properties loadProperties() {
+	 static synchronized Properties loadProperties() {
 		if(prop!=null){
 			logger.info("EIE configuration already loaded");
 			return prop;
