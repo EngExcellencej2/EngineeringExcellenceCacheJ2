@@ -4,6 +4,10 @@ import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
 
 /**
+ * <p>
+ * A Service utility which integrates with Application DAO Layer <code>IEIECacheDao</code>.
+ * Any client using this utility needs to invoke methods upon this class.
+ * </p>
  * @author ankit.kothari
  * @version 1.0
  * 
@@ -13,9 +17,8 @@ public interface IEIECacheService {
 	/**
 	 * <p>
 	 * Gets the response from the Cassandra database based on the input request.
-	 * In case data in not found in the database Exception is thrown.
+	 * In case data is not found in the database Exception is thrown.
 	 * </p>
-	 * 
 	 * @param eieReq
 	 * @return the <code>EIEResponse</code> to EIE Engine
 	 */
