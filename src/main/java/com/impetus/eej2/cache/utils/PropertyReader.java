@@ -28,7 +28,8 @@ import com.impetus.eej2.cache.exception.EieCacheException;
 	
 	/**
 	 * <p>
-	 * Load EIE Cache Configuration from properties file.This is one time operation.
+	 * Load EIE Cache Configuration from properties file.This is one time operation. In event of any <code>IOException</code>
+	 * the exception is wrapped up in <code>EieCacheException</code> as there wont be any sense of taking process forward in event of such scenario
 	 * </p>
 	 * @return
 	 */
