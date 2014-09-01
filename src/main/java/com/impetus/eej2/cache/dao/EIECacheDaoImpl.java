@@ -140,10 +140,10 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			return false;
-		} /*finally {
-			 Do not close our singleton session.
-			 session.close();
-		}*/
+		} finally {
+			 //Do not close our singleton session.
+			 //session.close();
+		}
 
 	}
 
