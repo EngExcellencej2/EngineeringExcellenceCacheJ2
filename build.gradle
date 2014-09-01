@@ -3,13 +3,12 @@ apply plugin: 'eclipse'
 apply plugin: 'distribution'
 apply plugin: 'pmd'
 apply plugin: 'findbugs'
-apply plugin: 'checkstyle'
 
-findbugs{
+pmd{
 	ignoreFailures = true
 }
 
-checkstyle{
+findbugs{
 	ignoreFailures = true
 }
 
