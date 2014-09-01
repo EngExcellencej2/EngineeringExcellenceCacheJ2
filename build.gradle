@@ -3,6 +3,15 @@ apply plugin: 'eclipse'
 apply plugin: 'distribution'
 apply plugin: 'pmd'
 apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
+
+findbugs{
+	ignoreFailures = true
+}
+
+checkStyle{
+	ignoreFailures = true
+}
 
 def projectName = 'EIECacheUtils'
 def propFileLocation = 'src/main/java/ipconfig.properties'
