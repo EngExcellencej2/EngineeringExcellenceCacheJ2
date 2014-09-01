@@ -9,7 +9,7 @@ findbugs{
 	ignoreFailures = true
 }
 
-checkStyle{
+checkstyle{
 	ignoreFailures = true
 }
 
