@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'distribution'
 apply plugin: 'pmd'
+apply plugin: 'findbugs'
 
 def projectName = 'EIECacheUtils'
 def propFileLocation = 'src/main/java/ipconfig.properties'
