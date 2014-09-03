@@ -54,6 +54,22 @@ public interface IEIECacheConstants {
      * The default value for this option is 25 for LOCAL and REMOTE hosts.The value ranges between 0 and 128.
 	 * </p>
 	 */
-	public static final String MIN_SIMULTANEOUS_REQ_PER_CONN_THRESHHOLD = "MIN_SIMULTANEOUS_REQ_PER_CONN_THRESHHOLD";
+	public static final String MIN_SIMULTANEOUS_REQ_PER_CONN_THRESHHOLD = "MIN_SIMULTANEOUS_REQ_PER_CONN_THRESHHOLD";	
+	public static final String ID = "ID";
+	public static final String COUNTRY_CODE = "countryCode";
+	public static final String TELEPHONE_NUMBER = "telephoneNumber";
+	public static final String MNC = "MNC";
+	public static final String MCC = "MCC";
+	public static final String SPID = "SPID";
+	public static final String CREATED_DATE = "Created Date";
+	public static final String REQUEST_TYPE = "Request Type";
+	public static final String RESPONSE_STRING = "Response String";
+	public static final String STATUS = "Status";
+	public static final String IMSI = "IMSI";
+	public static final String HLR = "HLR";
+	public static final String MSC = "MSC";
+	public static final String TN_TYPE = "TN_TYPE";
+	public static final String SUPPLIER_TYPE = "Supplier Type";
+	public static final String SUPPLIER_ID = "Supplier ID";
 	
 }
