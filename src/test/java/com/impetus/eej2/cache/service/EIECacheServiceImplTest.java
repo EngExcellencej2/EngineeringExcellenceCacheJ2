@@ -46,23 +46,23 @@ public class EIECacheServiceImplTest {
 	public void testAddEIEexternalResponse() {
 
 		eieResponse = new EIEResponse();
-		eieResponse.setCc(CC);
-		eieResponse.setCrDate(crDate);
-		eieResponse.setHLR(hLR);
+		eieResponse.setCountryCode(CC);
+		eieResponse.setCreatedDate(crDate);
+		eieResponse.setHlr(hLR);
 		eieResponse.setId(id);
-		eieResponse.setIMSI(iMSI);
-		eieResponse.setMCC(mCC);
-		eieResponse.setMNC(mNC);
-		eieResponse.setMSC(mSC);
-		eieResponse.setReqType(reqType);
-		eieResponse.setResString(resString);
-		eieResponse.setSPID(sPID);
+		eieResponse.setImsi(iMSI);
+		eieResponse.setMcc(mCC);
+		eieResponse.setMnc(mNC);
+		eieResponse.setMsc(mSC);
+		eieResponse.setRequestType(reqType);
+		eieResponse.setResponseString(resString);
+		eieResponse.setSpId(sPID);
 		eieResponse.setStatus(status);
 		eieResponse.setSupplierId(supplierId);
 		eieResponse.setSupplierType(supplierType);
-		eieResponse.setTN(TN);
-		eieResponse.setTN_Type(tN_Type);
-		eieResponse.setTTL(300);
+		eieResponse.setTelephoneNumber(TN);
+		eieResponse.setTnType(tN_Type);
+		eieResponse.setTimeToLive(300);
 		response = eieCacheServiceImpl.addEIEexternalResponse(eieResponse);
 		Assert.assertEquals(true, response);
 	}
@@ -73,9 +73,9 @@ public class EIECacheServiceImplTest {
 	public void testGetEIEresponse() {
 
 		eieRequest = new EIERequest();
-		eieRequest.setCC(CC);
-		eieRequest.setTN(TN);
-		eieRequest.setTTL(200);
+		eieRequest.setCountryCode(CC);
+		eieRequest.setTelephoneNumber(TN);
+		eieRequest.setTimeToLive(200);
 		eieResponse = eieCacheServiceImpl.getEIEresponse(eieRequest);
 		Assert.assertNotNull(eieResponse);
 	}
