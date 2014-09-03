@@ -121,7 +121,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 			PreparedStatement preparedStatement = session.prepare(
 					INSERT_RECORD_IN_CACHE).setConsistencyLevel(
 					ConsistencyLevel.LOCAL_ONE);
-			preparedStatement = session.prepare(GET_RECORD_FROM_CACHE).setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
 			preparedStatement.enableTracing();
 			BoundStatement boundStatement = preparedStatement.bind(
 					eieRes.getCountryCode() + "_" + eieRes.getTelephoneNumber(), eieRes.getMnc(),

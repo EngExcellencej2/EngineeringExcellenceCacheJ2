@@ -10,6 +10,12 @@ import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
 import com.impetus.eej2.cache.service.EIECacheServiceImpl;
 
+/**
+ * JUnit test class for EIECacheServiceImpl
+ * 
+ * @author EEJ2
+ * 
+ */
 public class EIECacheServiceImplTest {
 	private static String TN = "12345678";
 	private static String CC = "320";
@@ -30,18 +36,21 @@ public class EIECacheServiceImplTest {
 
 	private static Boolean response;
 
-	EIERequest eieRequest;
-	EIEResponse eieResponse;
-	EIECacheServiceImpl eieCacheServiceImpl;
+	EIERequest eieRequest = null;
+	EIEResponse eieResponse = null;
+	EIECacheServiceImpl eieCacheServiceImpl = null;
 
+	/**
+	 * This method creates the EIECacheServiceImpl instance
+	 */
 	@Before
 	public void createObject() {
 		eieCacheServiceImpl = new EIECacheServiceImpl();
 	}
-
 	
-	
-
+	/**
+	 * This method tests the write operation to the Cassandra DB 
+	 */
 	@Test
 	public void testAddEIEexternalResponse() {
 
@@ -62,22 +71,24 @@ public class EIECacheServiceImplTest {
 		eieResponse.setSupplierType(supplierType);
 		eieResponse.setTelephoneNumber(TN);
 		eieResponse.setTnType(tN_Type);
-		eieResponse.setTimeToLive(300);
+		eieResponse.setTimeToLive(864000);
 		response = eieCacheServiceImpl.addEIEexternalResponse(eieResponse);
 		Assert.assertEquals(true, response);
 	}
-
 	
 	
+	/**
+	 * This method tests the read operation from the Cassandra DB
+	 * The record inserted above is read back.
+	 */
 	@Test
 	public void testGetEIEresponse() {
 
 		eieRequest = new EIERequest();
 		eieRequest.setCountryCode(CC);
-		eieRequest.setTelephoneNumber(TN);
-		eieRequest.setTimeToLive(200);
+		eieRequest.setTelephoneNumber(TN);		
+		eieRequest.setTimeToLive(86400);
 		eieResponse = eieCacheServiceImpl.getEIEresponse(eieRequest);
-		Assert.assertNotNull(eieResponse);
+		Assert.assertEquals("Home", eieResponse.getTnType());
 	}
-	
 }
