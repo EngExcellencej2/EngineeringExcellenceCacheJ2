@@ -1,5 +1,9 @@
 package com.impetus.eej2.cache.entity;
 
+import java.io.Serializable;
+
+import com.impetus.eej2.cache.utils.IEIECacheConstants;
+
 /**
  * <p>
  * An entry to represent input request to EIE Cache utils
@@ -8,7 +12,13 @@ package com.impetus.eej2.cache.entity;
  * @author hitesh.pawar
  * @version 0.1
  */
-public class EIERequest {
+public class EIERequest implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3210508747283739871L;
+	public static final String REQUEST_KEY_VALUE_SEPARATOR=":";
 
 	/**
 	 * <p>
@@ -17,38 +27,43 @@ public class EIERequest {
 	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder("EIE Request [");
-		sb.append("TN:" + TN + "CC:" + CC + "]");
+		sb.append(IEIECacheConstants.TELEPHONE_NUMBER).append(REQUEST_KEY_VALUE_SEPARATOR).append(telephoneNumber)
+		.append(IEIECacheConstants.COUNTRY_CODE).append(REQUEST_KEY_VALUE_SEPARATOR).append(countryCode).append("]");
 		return sb.toString();
 	}
 
-	private String TN;
+	private String telephoneNumber;
 
-	private String CC;
+	private String countryCode;
+	
+	private Integer timeToLive;
 
-	private int TTL;
-
-	public int getTTL() {
-		return TTL;
+	public String getTelephoneNumber() {
+		return telephoneNumber;
 	}
 
-	public void setTTL(int tTL) {
-		TTL = tTL;
+	public void setTelephoneNumber(String telephoneNumber) {
+		this.telephoneNumber = telephoneNumber;
 	}
 
-	public String getTN() {
-		return TN;
+	public String getCountryCode() {
+		return countryCode;
 	}
 
-	public void setTN(String tN) {
-		TN = tN;
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
-	public String getCC() {
-		return CC;
+	public int getTimeToLive() {
+		return timeToLive;
 	}
 
-	public void setCC(String cC) {
-		CC = cC;
+	public void setTimeToLive(int timeToLive) {
+		this.timeToLive = timeToLive;
 	}
+
+	
+
+	
 
 }
