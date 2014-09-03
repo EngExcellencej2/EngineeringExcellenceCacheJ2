@@ -24,11 +24,14 @@ public class EIEResponse implements Serializable {
 	private String countryCode;
 
 	private String telephoneNumber;
-
+	
+	//Mobile Network Code
 	private String mnc;
-
+	
+	//Mobile Country Code
 	private String mcc;
 
+	//Service Provider Identifier (ID)
 	private String spId;
 
 	private Date createdDate;
@@ -39,12 +42,16 @@ public class EIEResponse implements Serializable {
 
 	private Long status;
 
+	//International Mobile Subscriber Identity
 	private Long imsi;
 
+	//Home Location Register
 	private Long hlr;
 
+	//Mobile Service Code
 	private Long msc;
-
+	
+	//Telephone Number (TN) type
 	private String tnType;
 
 	private String supplierType;
