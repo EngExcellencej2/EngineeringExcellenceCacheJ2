@@ -28,47 +28,47 @@ public class CacheDriver {
 	private static void writeCache(IEIECacheService cacheService) {
 		logger.info("inside writeCache method of CacheDriver");
 		EIEResponse eieResponse=new EIEResponse();
-		eieResponse.setCc("CC");
-		eieResponse.setCrDate(new Date());
-		eieResponse.setHLR(12345L);
+		eieResponse.setCountryCode("CC");
+		eieResponse.setCreatedDate(new Date());
+		eieResponse.setHlr(12345L);
 		eieResponse.setId("ID");
-		eieResponse.setIMSI(987L);
-		eieResponse.setMCC("MCC");
-		eieResponse.setMNC("MNC");
-		eieResponse.setMSC(457L);
-		eieResponse.setReqType(20L);
-		eieResponse.setResString(null);
-		eieResponse.setSPID("SPID");
+		eieResponse.setImsi(987L);
+		eieResponse.setMcc("MCC");
+		eieResponse.setMnc("MNC");
+		eieResponse.setMsc(457L);
+		eieResponse.setRequestType(20L);
+		eieResponse.setResponseString(null);
+		eieResponse.setSpId("SPID");
 		eieResponse.setStatus(0L);
 		eieResponse.setSupplierId(90L);
 		eieResponse.setSupplierType("supplirType");
-		eieResponse.setTN("TN");
-		eieResponse.setTN_Type("TN_TYPE");
+		eieResponse.setTelephoneNumber("TN");
+		eieResponse.setTnType("TN_TYPE");
 		
 		
 		
-		System.out.println("Record written in Cache"+cacheService.addEIEexternalResponse(eieResponse));
+		logger.info("Record written in Cache"+cacheService.addEIEexternalResponse(eieResponse));
 	}
 
 	private static void readCache(IEIECacheService cacheService) {
 		logger.info("inside readCache method of CacheDriver");
 		EIERequest eieRequest = new EIERequest();
-		eieRequest.setCC("30");
-		eieRequest.setTN("6977413285");
+		eieRequest.setCountryCode("30");
+		eieRequest.setTelephoneNumber("6977413285");
 		EIEResponse eieResponse = cacheService.getEIEresponse(eieRequest);
 		
-		System.out.print("COUNTRY_CODE " + eieResponse.getCc() + "\n" + "ID "
-				+ eieResponse.getId() + "\n" + "MCC " + eieResponse.getMCC()
-				+ "\n" + "MNC " + eieResponse.getMNC() + "\n"
-				+ "RESPONSE_STRING " + eieResponse.getResString() + "\n"
-				+ "SPID " + eieResponse.getSPID() + "\n" + "TN "
-				+ eieResponse.getTN() + "\n" + "TN_TYPE "
-				+ eieResponse.getTN_Type() + "\n" + "HLR "
-				+ eieResponse.getHLR() + "\n" + "IMSI " + eieResponse.getIMSI()
-				+ "\n" + "MSC " + eieResponse.getMSC() + "\n" + "REQUEST_TYPE "
-				+ eieResponse.getReqType() + "\n" + "STATUS "
+		logger.info("COUNTRY_CODE " + eieResponse.getCountryCode() + "\n" + "ID "
+				+ eieResponse.getId() + "\n" + "MCC " + eieResponse.getMcc()
+				+ "\n" + "MNC " + eieResponse.getMnc() + "\n"
+				+ "RESPONSE_STRING " + eieResponse.getResponseString() + "\n"
+				+ "SPID " + eieResponse.getSpId() + "\n" + "TelephoneNumber "
+				+ eieResponse.getTelephoneNumber() + "\n" + "TN_TYPE "
+				+ eieResponse.getTnType() + "\n" + "HLR "
+				+ eieResponse.getHlr() + "\n" + "IMSI " + eieResponse.getImsi()
+				+ "\n" + "MSC " + eieResponse.getMsc() + "\n" + "REQUEST_TYPE "
+				+ eieResponse.getRequestType() + "\n" + "STATUS "
 				+ eieResponse.getStatus() + "\n" + "CREATED_DT "
-				+ eieResponse.getCrDate());
+				+ eieResponse.getCreatedDate());
 	}
 	
 	//configure the log4j file

@@ -62,21 +62,21 @@ public class EIECacheDaoImpl implements IEIECacheDao {
             	Date createdDate = row.getDate("created_date");
             	int diff = (int) ((currentDate.getTime()-createdDate.getTime())/1000);
             	
-            	if(diff<=eieReq.getTTL())
+            	if(diff<=eieReq.getTimeToLive())
             	{	
             		eieRes = new EIEResponse();
     				eieRes.setId(row.getString("row_id"));
-    				eieRes.setMNC(row.getString("mnc"));
-    				eieRes.setMCC(row.getString("mcc"));
-    				eieRes.setSPID(row.getString("spid"));
-    				eieRes.setCrDate(row.getDate("created_date"));
-    				eieRes.setReqType(row.getLong("request_type"));
-    				eieRes.setResString(row.getString("response_string"));
+    				eieRes.setMnc(row.getString("mnc"));
+    				eieRes.setMcc(row.getString("mcc"));
+    				eieRes.setSpId(row.getString("spid"));
+    				eieRes.setCreatedDate(row.getDate("created_date"));
+    				eieRes.setRequestType(row.getLong("request_type"));
+    				eieRes.setResponseString(row.getString("response_string"));
     				eieRes.setStatus(row.getLong("status"));
-    				eieRes.setIMSI(row.getLong("imsi"));
-    				eieRes.setHLR(row.getLong("hlr"));
-    				eieRes.setMSC(row.getLong("msc"));
-    				eieRes.setTN_Type(row.getString("tn_type"));
+    				eieRes.setImsi(row.getLong("imsi"));
+    				eieRes.setHlr(row.getLong("hlr"));
+    				eieRes.setMsc(row.getLong("msc"));
+    				eieRes.setTnType(row.getString("tn_type"));
     				eieRes.setSupplierId(row.getLong("supplier_id"));
     				eieRes.setSupplierType(row.getString("supplier_type"));
     				break;	
@@ -96,7 +96,10 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 			throw new EieCacheException(EieCacheErrorCodes.UNSUCCESSFULL_READ,
 					EieCacheErrorCodes.UNSUCCESSFULL_READ.getErrorMessage(),
 					exception.getMessage());
-		}
+		} /*finally {
+			Do not close our singleton session.
+			session.close();
+		}*/
 		return eieRes;
 	}
 
@@ -108,7 +111,7 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 	 * @return rowId for Cassandra record
 	 */
 	private String getRowID(EIERequest eieReq) {
-		String src = eieReq.getCC() + "_" + eieReq.getTN();
+		String src = eieReq.getCountryCode() + "_" + eieReq.getTelephoneNumber();
 		return src;
 	}
 
@@ -124,19 +127,24 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 			preparedStatement = session.prepare(GET_RECORD_FROM_CACHE).setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
 			preparedStatement.enableTracing();
 			BoundStatement boundStatement = preparedStatement.bind(
-					eieRes.getCc() + "_" + eieRes.getTN(), eieRes.getMNC(),
-					eieRes.getMCC(), eieRes.getSPID(), new Date(),
-					eieRes.getReqType(), eieRes.getResString(),
-					eieRes.getStatus(), eieRes.getIMSI(), eieRes.getHLR(),
-					eieRes.getMSC(), eieRes.getTN_Type(),
+					eieRes.getCountryCode() + "_" + eieRes.getTelephoneNumber(), eieRes.getMnc(),
+					eieRes.getMcc(), eieRes.getSpId(), new Date(),
+					eieRes.getRequestType(), eieRes.getResponseString(),
+					eieRes.getStatus(), eieRes.getImsi(), eieRes.getHlr(),
+					eieRes.getMsc(), eieRes.getTnType(),
 					eieRes.getSupplierId(), eieRes.getSupplierType(),
-					eieRes.getTTL());
+					eieRes.getTimeToLive());
 			session.execute(boundStatement);
 			return true;
 
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			return false;
+		} finally {
+			 //Do not close our singleton session.
+			 //session.close();
 		}
+
 	}
+
 }
