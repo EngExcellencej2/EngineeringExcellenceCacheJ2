@@ -19,9 +19,9 @@ public class CacheDriver {
 	public static void main(String args[]) {
 		logger.info("inside main method of CacheDriver");
 		IEIECacheService cacheService = new EIECacheServiceImpl();
-		/*readCache(cacheService);*/
+		readCache(cacheService);
 		
-		writeCache(cacheService);
+	/*	writeCache(cacheService);*/
 
 	}
 

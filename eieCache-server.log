@@ -1,0 +1,26 @@
+2014-09-04 15:20:43.835 [INFO ] [main] [CacheDriver] - inside main method of CacheDriver
+2014-09-04 15:20:43.840 [INFO ] [main] [CassandraConnectionUtils] - Initialize EIE Cache Cassandra Cluster environment
+2014-09-04 15:20:43.840 [INFO ] [main] [PropertyReader] - Load EIE Cache Configuration from properties file
+2014-09-04 15:20:43.846 [WARN ] [main] [FrameCompressor] - Cannot find Snappy class, you should make sure the Snappy library is in the classpath if you intend to use it. Snappy compression will not be available for the protocol.
+2014-09-04 15:20:43.944 [INFO ] [main] [CassandraConnectionUtils] - Set Up Session Pool for connection
+2014-09-04 15:20:44.675 [INFO ] [main] [Cluster] - New Cassandra host /192.168.64.139:9042 added
+2014-09-04 15:20:45.753 [INFO ] [main] [CassandraConnectionUtils] - Connected to cluster 'Test Cluster' on [/172.26.34.64:9042, /172.26.34.76:9042, /192.168.64.139:9042].
+2014-09-04 15:20:45.754 [INFO ] [main] [CacheDriver] - inside readCache method of CacheDriver
+2014-09-04 15:20:45.755 [INFO ] [main] [EIECacheServiceImpl] - inside getEIEresponse of  EIECacheServiceImpl EIE Request [telephoneNumber:6977413285countryCode:30]
+2014-09-04 15:20:45.755 [INFO ] [main] [EIECacheDaoImpl] - inside getEIEResponse of EIECacheDaoImpl EIE Request [telephoneNumber:6977413285countryCode:30]
+2014-09-04 15:20:45.900 [INFO ] [main] [EIECacheDaoImpl] - QUERY TRACEExecute CQL3 prepared query [f12746a0-3418-11e4-b71b-c9f5973819ea] - 50499µs
+2014-09-04 15:20:45.900 [INFO ] [main] [EIECacheDaoImpl] - QUERIED HOST/172.26.34.76:9042
+2014-09-04 15:20:45.900 [INFO ] [main] [EIECacheDaoImpl] - TRIED HOST[/172.26.34.76:9042]
+2014-09-04 15:21:39.579 [INFO ] [main] [CacheDriver] - inside main method of CacheDriver
+2014-09-04 15:21:39.584 [INFO ] [main] [CassandraConnectionUtils] - Initialize EIE Cache Cassandra Cluster environment
+2014-09-04 15:21:39.585 [INFO ] [main] [PropertyReader] - Load EIE Cache Configuration from properties file
+2014-09-04 15:21:39.590 [WARN ] [main] [FrameCompressor] - Cannot find Snappy class, you should make sure the Snappy library is in the classpath if you intend to use it. Snappy compression will not be available for the protocol.
+2014-09-04 15:21:39.656 [INFO ] [main] [CassandraConnectionUtils] - Set Up Session Pool for connection
+2014-09-04 15:21:39.912 [INFO ] [main] [Cluster] - New Cassandra host /192.168.64.139:9042 added
+2014-09-04 15:21:40.406 [INFO ] [main] [CassandraConnectionUtils] - Connected to cluster 'Test Cluster' on [/172.26.34.64:9042, /172.26.34.76:9042, /192.168.64.139:9042].
+2014-09-04 15:21:40.406 [INFO ] [main] [CacheDriver] - inside readCache method of CacheDriver
+2014-09-04 15:21:40.408 [INFO ] [main] [EIECacheServiceImpl] - inside getEIEresponse of  EIECacheServiceImpl EIE Request [telephoneNumber:6977413285countryCode:30]
+2014-09-04 15:21:40.408 [INFO ] [main] [EIECacheDaoImpl] - inside getEIEResponse of EIECacheDaoImpl EIE Request [telephoneNumber:6977413285countryCode:30]
+2014-09-04 15:21:40.480 [INFO ] [main] [EIECacheDaoImpl] - QUERY TRACEExecute CQL3 prepared query [11b5c770-3419-11e4-b71b-c9f5973819ea] - 10445µs
+2014-09-04 15:21:40.481 [INFO ] [main] [EIECacheDaoImpl] - QUERIED HOST/172.26.34.76:9042
+2014-09-04 15:21:40.481 [INFO ] [main] [EIECacheDaoImpl] - TRIED HOST[/172.26.34.76:9042]
