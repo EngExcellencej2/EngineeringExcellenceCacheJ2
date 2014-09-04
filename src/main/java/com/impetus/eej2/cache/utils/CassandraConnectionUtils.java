@@ -14,8 +14,7 @@ import com.datastax.driver.core.ProtocolOptions;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy;
 import com.datastax.driver.core.policies.FallthroughRetryPolicy;
-import com.impetus.eej2.cache.exception.EieCacheCheckedException;
-import com.impetus.eej2.cache.exception.EieCacheRunTimeException;
+import com.impetus.eej2.cache.exception.EieCacheException;
 
 /**
  * @author hitesh.pawar
@@ -76,9 +75,9 @@ public enum CassandraConnectionUtils {
 			cluster.init();
 			session = cluster.connect();
 		}
-		catch(RuntimeException e){
-			logger.error("Could not establish connection to Cassandra Cluster ",e);
-			throw new EieCacheRunTimeException("Error occurred while connecting to Cassandra Cluster::"+e);
+		catch(Exception e){
+			logger.error("Could not establish connection to Cassandra Cluster");
+			throw new EieCacheException("Error occurred while connecting to Cassandra Cluster::"+e);
 		}
 		
         Metadata metadata = cluster.getMetadata();

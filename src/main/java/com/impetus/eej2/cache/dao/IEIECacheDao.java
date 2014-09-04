@@ -2,7 +2,6 @@ package com.impetus.eej2.cache.dao;
 
 import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
-import com.impetus.eej2.cache.exception.EieCacheCheckedException;
 
 /**
  * <p>
@@ -23,7 +22,7 @@ public interface IEIECacheDao {
 	 * @param eieReq
 	 * @return the <code>EIEReponse to service Layer
 	 */
-	public EIEResponse getEIEResponse(EIERequest eieReq) throws EieCacheCheckedException;
+	public EIEResponse getEIEResponse(EIERequest eieReq);
 
 	/**
 	 * <p>
@@ -34,5 +33,5 @@ public interface IEIECacheDao {
 	 * @param eieRes
 	 * @return the output in <code>boolean</code> format to service layer
 	 */
-	public Boolean addEIEExternalReponse(EIEResponse eieRes) throws EieCacheCheckedException;
+	public Boolean addEIEExternalReponse(EIEResponse eieRes);
 }

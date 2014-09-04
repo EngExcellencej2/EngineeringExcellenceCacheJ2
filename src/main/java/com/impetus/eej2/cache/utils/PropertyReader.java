@@ -5,10 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.impetus.eej2.cache.exception.EieCacheCheckedException;
-import com.impetus.eej2.cache.exception.EieCacheRunTimeException;
-
+import com.impetus.eej2.cache.exception.EieCacheException;
 
 /**
  * <p>
@@ -35,9 +32,8 @@ import com.impetus.eej2.cache.exception.EieCacheRunTimeException;
 	 * the exception is wrapped up in <code>EieCacheException</code> as there wont be any sense of taking process forward in event of such scenario
 	 * </p>
 	 * @return
-	 * @throws EieCacheCheckedException 
 	 */
-	 static synchronized Properties loadProperties()  {
+	 static synchronized Properties loadProperties() {
 		if(prop!=null){
 			logger.info("EIE configuration already loaded");
 			return prop;
@@ -49,13 +45,12 @@ import com.impetus.eej2.cache.exception.EieCacheRunTimeException;
 			String filename = "ipconfig.properties";
 			input = PropertyReader.class.getClassLoader().getResourceAsStream(filename);
 			if (input == null) {
-				throw new EieCacheRunTimeException("Not able to initialize input stream, "+filename+" not found");
+				throw new EieCacheException("Not able to initialize input stream, "+filename+" not found");
 			}
 			prop.load(input);
 			logger.debug("Configuration successfuly loaded from properties file::"+prop);
 		} catch (IOException ex) {
-			
-			throw new EieCacheRunTimeException("Exception while reading Property file:ipconfig.properties"+ex);
+			throw new EieCacheException("Exception while reading Property file:ipconfig.properties"+ex);
 		} finally {
 			if (input != null) {
 				try {

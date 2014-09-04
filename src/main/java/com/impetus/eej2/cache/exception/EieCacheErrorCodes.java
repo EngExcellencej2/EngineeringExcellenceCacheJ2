@@ -9,10 +9,8 @@ package com.impetus.eej2.cache.exception;
  */
 public enum EieCacheErrorCodes {
 	UNSUCCESSFULL_READ("unsuccesfullRead",
-			"not able to read data from database"),
-	UNSUCCESSFULL_WRITE(
-			"unsuccessfullwrite", "not able to write data in db"),
-	NULL_SEESION("nullsession","session value is  null found");
+			"not able to read data from database"), UNSUCCESSFULL_WRITE(
+			"unsuccessfullwrite", "not able to write data in db");
 
 	private String errorCode;
 	private String errorMessage;
