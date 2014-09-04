@@ -7,7 +7,7 @@ package com.impetus.eej2.cache.exception;
  * </p>
  *
  */
-public class EieCacheException extends RuntimeException {
+public class EieCacheRunTimeException extends RuntimeException {
 
 	/**
 	 * 
@@ -17,13 +17,13 @@ public class EieCacheException extends RuntimeException {
 	private String errorMessage;
 	private String actualerror;
 
-	public EieCacheException(EieCacheErrorCodes errorCode, String errorMessage) {
+	public EieCacheRunTimeException(EieCacheErrorCodes errorCode, String errorMessage) {
 
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 	}
 
-	public EieCacheException(String errorMessage) {
+	public EieCacheRunTimeException(String errorMessage) {
 		super();
 		this.errorMessage = errorMessage;
 	}
@@ -60,7 +60,7 @@ public class EieCacheException extends RuntimeException {
 	 * @param errorMessage
 	 * @param actualerror
 	 */
-	public EieCacheException(EieCacheErrorCodes errorCode, String errorMessage,
+	public EieCacheRunTimeException(EieCacheErrorCodes errorCode, String errorMessage,
 			String actualerror) {
 		super();
 		this.errorCode = errorCode;
@@ -70,7 +70,7 @@ public class EieCacheException extends RuntimeException {
 
 	@Override
 	public String toString() {
-		return errorMessage + "due to" + actualerror;
+		return errorMessage + " : " + actualerror;
 	}
 
 }
