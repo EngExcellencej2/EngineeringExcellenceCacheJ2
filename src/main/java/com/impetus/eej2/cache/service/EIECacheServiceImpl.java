@@ -15,7 +15,6 @@ import com.impetus.eej2.cache.entity.EIEResponse;
 import com.impetus.eej2.cache.exception.EieCacheCheckedException;
 import com.impetus.eej2.cache.exception.EieCacheErrorCodes;
 
-// TODO: Auto-generated Javadoc
 /**
  * <p>
  * An implementation of <code>IEIECacheService</code> to integrate with
@@ -45,7 +44,6 @@ public class EIECacheServiceImpl implements IEIECacheService {
 	 * Inits the.
 	 */
 	private void init() {
-<<<<<<< HEAD
 		ieieCacheDao = new EIECacheDaoImpl();
 	}
 
@@ -189,29 +187,6 @@ public class EIECacheServiceImpl implements IEIECacheService {
 		}
 
 		return writeFlag;
-=======
-
-		ieieCacheDao = new EIECacheDaoImpl();
-	}
-
-	/* (non-Javadoc)
-	 * @see com.impetus.eej2.cache.service.IEIECacheService#getEIEresponse(com.impetus.eej2.cache.entity.EIERequest)
-	 */
-	public EIEResponse getEIEresponse(EIERequest eieReq) {
-		logger.info("inside getEIEresponse of  EIECacheServiceImpl {}", eieReq);
-
-		return ieieCacheDao.getEIEResponse(eieReq);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.impetus.eej2.cache.service.IEIECacheService#addEIEexternalResponse(com.impetus.eej2.cache.entity.EIEResponse)
-	 */
-	public Boolean addEIEexternalResponse(EIEResponse eieRes) {
-		logger.info("inside addEIEexternalResponse of  EIECacheServiceImpl {}",
-				eieRes);
-
-		return ieieCacheDao.addEIEExternalReponse(eieRes);
->>>>>>> 2e57ad09ee7283a2ea9fb4d152d7cecddc9298b5
 	}
 
 }

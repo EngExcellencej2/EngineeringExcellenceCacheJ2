@@ -60,7 +60,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 				preparedStatement = session.prepare(GET_RECORD_FROM_CACHE)
 						.setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
 				preparedStatement.enableTracing();
-<<<<<<< HEAD
 				BoundStatement boundStatement = preparedStatement.bind(rowID);
 				rowSet = session.execute(boundStatement);
 				ExecutionInfo executionInfo = rowSet.getExecutionInfo();
@@ -95,51 +94,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 					} else {
 						continue;
 					}
-=======
-			}
-			
-			BoundStatement boundStatement = preparedStatement.bind(rowID);
-			rowSet = session.execute(boundStatement);
-			ExecutionInfo executionInfo=rowSet.getExecutionInfo();
-			logger.info("QUERY TRACE"+executionInfo.getQueryTrace());
-			logger.info("QUERIED HOST"+executionInfo.getQueriedHost());
-			logger.info("TRIED HOST"+executionInfo.getTriedHosts());
-			Date currentDate = new Date();
-			
-			for(Row row : rowSet)
-            {	
-            	Date createdDate = row.getDate("created_date");
-            	int diff = (int) ((currentDate.getTime()-createdDate.getTime())/1000);
-            	
-            	if(diff<=eieReq.getTimeToLive())
-            	{	
-            		eieRes = new EIEResponse();
-    				eieRes.setId(row.getString("row_id"));
-    				eieRes.setMnc(row.getString("mnc"));
-    				eieRes.setMcc(row.getString("mcc"));
-    				eieRes.setSpId(row.getString("spid"));
-    				eieRes.setCreatedDate(row.getDate("created_date"));
-    				eieRes.setRequestType(row.getLong("request_type"));
-    				eieRes.setResponseString(row.getString("response_string"));
-    				eieRes.setStatus(row.getLong("status"));
-    				eieRes.setImsi(row.getLong("imsi"));
-    				eieRes.setHlr(row.getLong("hlr"));
-    				eieRes.setMsc(row.getLong("msc"));
-    				eieRes.setTnType(row.getString("tn_type"));
-    				eieRes.setSupplierId(row.getLong("supplier_id"));
-    				eieRes.setSupplierType(row.getString("supplier_type"));
-    				break;	
-            	}
-            	else
-            	{
-            		continue;
-            	}
-            	
-            }
-			
-		
-			
->>>>>>> 2e57ad09ee7283a2ea9fb4d152d7cecddc9298b5
 
 				}
 
@@ -203,7 +157,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 					"null value found",
 					nullPointerException.toString());
 		} catch (Exception exception) {
-<<<<<<< HEAD
 			logger.error("error during reading data ", exception);
 			throw new EieCacheCheckedException(
 					EieCacheErrorCodes.UNSUCCESSFULL_READ,
@@ -212,13 +165,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 		/*
 		 * finally { Do not close our singleton session. session.close(); }
 		 */
-=======
-			logger.error("getting exception inside EIECacheDaoImpl.getEIEResponse");
-			throw new EieCacheException(EieCacheErrorCodes.UNSUCCESSFULL_READ,
-					EieCacheErrorCodes.UNSUCCESSFULL_READ.getErrorMessage(),
-					exception.getMessage());
-		}
->>>>>>> 2e57ad09ee7283a2ea9fb4d152d7cecddc9298b5
 		return eieRes;
 	}
 
@@ -248,11 +194,8 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 			PreparedStatement preparedStatement = session.prepare(
 					INSERT_RECORD_IN_CACHE).setConsistencyLevel(
 					ConsistencyLevel.LOCAL_ONE);
-<<<<<<< HEAD
 			preparedStatement = session.prepare(INSERT_RECORD_IN_CACHE)
 					.setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
-=======
->>>>>>> 2e57ad09ee7283a2ea9fb4d152d7cecddc9298b5
 			preparedStatement.enableTracing();
 			BoundStatement boundStatement = preparedStatement.bind(
 					eieRes.getCountryCode() + "_" + eieRes.getTelephoneNumber(), eieRes.getMnc(),
@@ -263,7 +206,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 					eieRes.getSupplierId(), eieRes.getSupplierType(),
 					eieRes.getTimeToLive());
 			session.execute(boundStatement);
-<<<<<<< HEAD
 			writeflag = true;
 			
 			}
@@ -341,13 +283,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 		}
 		return  writeflag; 
 
-=======
-			return true;
-
-		} catch (Exception exception) {
-			exception.printStackTrace();
-			return false;
-		}
->>>>>>> 2e57ad09ee7283a2ea9fb4d152d7cecddc9298b5
 	}
+
 }

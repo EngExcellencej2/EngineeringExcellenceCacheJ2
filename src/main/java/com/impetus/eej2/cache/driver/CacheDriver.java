@@ -22,11 +22,7 @@ public class CacheDriver {
 		IEIECacheService cacheService = new EIECacheServiceImpl();
 		readCache(cacheService);
 		
-<<<<<<< HEAD
 	//	writeCache(cacheService);
-=======
-	/*	writeCache(cacheService);*/
->>>>>>> 2e57ad09ee7283a2ea9fb4d152d7cecddc9298b5
 
 	}
 
@@ -49,20 +45,16 @@ public class CacheDriver {
 		eieResponse.setSupplierType("supplirType");
 		eieResponse.setTelephoneNumber("TN");
 		eieResponse.setTnType("TN_TYPE");
-<<<<<<< HEAD
 		eieResponse.setTimeToLive(400);
-=======
->>>>>>> 2e57ad09ee7283a2ea9fb4d152d7cecddc9298b5
 		
 		
 		
-		logger.info("Record written in Cache"+cacheService.addEIEexternalResponse(eieResponse));
+		System.out.println("Record written in Cache"+cacheService.addEIEexternalResponse(eieResponse));
 	}
 
 	private static void readCache(IEIECacheService cacheService) throws EieCacheCheckedException {
 		logger.info("inside readCache method of CacheDriver");
 		EIERequest eieRequest = new EIERequest();
-<<<<<<< HEAD
 		eieRequest.setCountryCode("CC");
 		eieRequest.setTelephoneNumber("TN");
 		eieRequest.setTimeToLive(100);
@@ -73,17 +65,6 @@ public class CacheDriver {
 				+ "\n" + "MNC " + eieResponse.getMnc() + "\n"
 				+ "RESPONSE_STRING " + eieResponse.getResponseString() + "\n"
 				+ "SPID " + eieResponse.getSpId() + "\n" + "TN "
-=======
-		eieRequest.setCountryCode("30");
-		eieRequest.setTelephoneNumber("6977413285");
-		EIEResponse eieResponse = cacheService.getEIEresponse(eieRequest);
-		
-		logger.info("COUNTRY_CODE " + eieResponse.getCountryCode() + "\n" + "ID "
-				+ eieResponse.getId() + "\n" + "MCC " + eieResponse.getMcc()
-				+ "\n" + "MNC " + eieResponse.getMnc() + "\n"
-				+ "RESPONSE_STRING " + eieResponse.getResponseString() + "\n"
-				+ "SPID " + eieResponse.getSpId() + "\n" + "TelephoneNumber "
->>>>>>> 2e57ad09ee7283a2ea9fb4d152d7cecddc9298b5
 				+ eieResponse.getTelephoneNumber() + "\n" + "TN_TYPE "
 				+ eieResponse.getTnType() + "\n" + "HLR "
 				+ eieResponse.getHlr() + "\n" + "IMSI " + eieResponse.getImsi()
@@ -91,11 +72,8 @@ public class CacheDriver {
 				+ eieResponse.getRequestType() + "\n" + "STATUS "
 				+ eieResponse.getStatus() + "\n" + "CREATED_DT "
 				+ eieResponse.getCreatedDate());
-<<<<<<< HEAD
 		System.out.println(eieResponse.getIsDataFound());
 		System.out.println(eieResponse.getStatusMessage());
-=======
->>>>>>> 2e57ad09ee7283a2ea9fb4d152d7cecddc9298b5
 	}
 	
 	//configure the log4j file
