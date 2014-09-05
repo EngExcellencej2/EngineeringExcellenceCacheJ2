@@ -135,28 +135,7 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 					"BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported",
 					unsupportedFeatureException.toString());
 		}
-		catch (IllegalArgumentException illegalArgumentException) {
-			logger.error("more values are provided than there is of bound variables in this statement. ",
-					illegalArgumentException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_READ,
-					"more values are provided than there is of bound variables in this statement.",
-					illegalArgumentException.toString());
-		} catch (InvalidTypeException invalidTypeException) {
-			logger.error("any of the provided value is not of correct type to be bound to the corresponding bind variable ",
-					invalidTypeException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_READ,
-					"any of the provided value is not of correct type to be bound to the corresponding bind variable",
-					invalidTypeException.toString());
-		} catch (NullPointerException nullPointerException) {
-			logger.error("null value found ",
-					nullPointerException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_READ,
-					"null value found",
-					nullPointerException.toString());
-		} catch (Exception exception) {
+		 catch (Exception exception) {
 			logger.error("error during reading data ", exception);
 			throw new EieCacheCheckedException(
 					EieCacheErrorCodes.UNSUCCESSFULL_READ,
@@ -247,29 +226,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 					EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
 					"BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported",
 					unsupportedFeatureException.toString());
-		}
-		catch (IllegalArgumentException illegalArgumentException) {
-			illegalArgumentException.printStackTrace();
-			logger.error("more values are provided than there is of bound variables in this statement. ",
-					illegalArgumentException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
-					"more values are provided than there is of bound variables in this statement.",
-					illegalArgumentException.toString());
-		} catch (InvalidTypeException invalidTypeException) {
-			logger.error("any of the provided value is not of correct type to be bound to the corresponding bind variable ",
-					invalidTypeException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
-					"any of the provided value is not of correct type to be bound to the corresponding bind variable",
-					invalidTypeException.toString());
-		} catch (NullPointerException nullPointerException) {
-			logger.error("null value found ",
-					nullPointerException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
-					"null value found",
-					nullPointerException.toString());
 		}
 		catch (Exception exception) {
 			logger.error("error during writing data ", exception);
