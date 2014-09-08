@@ -3,17 +3,11 @@ package com.impetus.eej2.cache.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.datastax.driver.core.exceptions.InvalidTypeException;
-import com.datastax.driver.core.exceptions.NoHostAvailableException;
-import com.datastax.driver.core.exceptions.QueryExecutionException;
-import com.datastax.driver.core.exceptions.QueryValidationException;
-import com.datastax.driver.core.exceptions.UnsupportedFeatureException;
-import com.impetus.eej2.cache.dao.EIECacheDaoImpl;
 import com.impetus.eej2.cache.dao.IEIECacheDao;
 import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
 import com.impetus.eej2.cache.exception.EieCacheCheckedException;
-import com.impetus.eej2.cache.exception.EieCacheErrorCodes;
+import com.impetus.eej2.cache.factory.DaoCreationFactory;
 
 /**
  * <p>
@@ -36,15 +30,16 @@ public class EIECacheServiceImpl implements IEIECacheService {
 	/**
 	 * Instantiates a new EIE cache service impl.
 	 */
-	public EIECacheServiceImpl() {
-		init();
+	public EIECacheServiceImpl(String driverType) {
+		init(driverType);
 	}
 
 	/**
 	 * Inits the.
 	 */
-	private void init() {
-		ieieCacheDao = new EIECacheDaoImpl();
+	private void init(String driverType) {
+		
+		ieieCacheDao = DaoCreationFactory.getDaoObject(driverType);
 	}
 
 	public EIEResponse getEIEresponse(EIERequest eieReq) throws EieCacheCheckedException
