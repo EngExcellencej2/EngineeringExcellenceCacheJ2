@@ -7,7 +7,7 @@ package com.impetus.eej2.cache.exception;
  * </p>
  *
  */
-public enum EieCacheErrorCodes {
+public enum EIECacheErrorCodes {
 	UNSUCCESSFULL_READ("unsuccesfullRead",
 			"not able to read data from database"),
 	UNSUCCESSFULL_WRITE(
@@ -20,7 +20,7 @@ public enum EieCacheErrorCodes {
 	/**
 	 * @param errorCode
 	 */
-	private EieCacheErrorCodes(String errorCode) {
+	private EIECacheErrorCodes(String errorCode) {
 		this.errorCode = errorCode;
 	}
 
@@ -40,7 +40,7 @@ public enum EieCacheErrorCodes {
 		this.errorMessage = errorMessage;
 	}
 
-	EieCacheErrorCodes(String errorCode, String errorMessage) {
+	EIECacheErrorCodes(String errorCode, String errorMessage) {
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 	}

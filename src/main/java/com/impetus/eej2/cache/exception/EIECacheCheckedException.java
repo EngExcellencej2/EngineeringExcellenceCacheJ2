@@ -1,16 +1,16 @@
 package com.impetus.eej2.cache.exception;
 
-public class EieCacheCheckedException extends Exception {
+public class EIECacheCheckedException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private EieCacheErrorCodes errorCode;
+	private EIECacheErrorCodes errorCode;
 	private String errorMessage;
 	private String actualerror;
 
-	public EieCacheCheckedException(EieCacheErrorCodes errorCode, String errorMessage) {
+	public EIECacheCheckedException(EIECacheErrorCodes errorCode, String errorMessage) {
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 	}
@@ -23,7 +23,7 @@ public class EieCacheCheckedException extends Exception {
 	 * @param errorMessage
 	 * @param actualerror
 	 */
-	public EieCacheCheckedException(EieCacheErrorCodes errorCode, String errorMessage,
+	public EIECacheCheckedException(EIECacheErrorCodes errorCode, String errorMessage,
 			String actualerror) {
 		super();
 		this.errorCode = errorCode;
@@ -35,16 +35,16 @@ public class EieCacheCheckedException extends Exception {
 
 	
 
-	public EieCacheCheckedException(String errorMessage) {
+	public EIECacheCheckedException(String errorMessage) {
 		super();
 		this.errorMessage = errorMessage;
 	}
 
-	public EieCacheErrorCodes getErrorCode() {
+	public EIECacheErrorCodes getErrorCode() {
 		return errorCode;
 	}
 
-	public void setErrorCode(EieCacheErrorCodes errorCode) {
+	public void setErrorCode(EIECacheErrorCodes errorCode) {
 		this.errorCode = errorCode;
 	}
 

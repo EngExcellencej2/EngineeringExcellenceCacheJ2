@@ -7,32 +7,32 @@ package com.impetus.eej2.cache.exception;
  * </p>
  *
  */
-public class EieCacheRunTimeException extends RuntimeException {
+public class EIECacheRunTimeException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private EieCacheErrorCodes errorCode;
+	private EIECacheErrorCodes errorCode;
 	private String errorMessage;
 	private String actualerror;
 
-	public EieCacheRunTimeException(EieCacheErrorCodes errorCode, String errorMessage) {
+	public EIECacheRunTimeException(EIECacheErrorCodes errorCode, String errorMessage) {
 
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 	}
 
-	public EieCacheRunTimeException(String errorMessage) {
+	public EIECacheRunTimeException(String errorMessage) {
 		super();
 		this.errorMessage = errorMessage;
 	}
 
-	public EieCacheErrorCodes getErrorCode() {
+	public EIECacheErrorCodes getErrorCode() {
 		return errorCode;
 	}
 
-	public void setErrorCode(EieCacheErrorCodes errorCode) {
+	public void setErrorCode(EIECacheErrorCodes errorCode) {
 		this.errorCode = errorCode;
 	}
 
@@ -60,7 +60,7 @@ public class EieCacheRunTimeException extends RuntimeException {
 	 * @param errorMessage
 	 * @param actualerror
 	 */
-	public EieCacheRunTimeException(EieCacheErrorCodes errorCode, String errorMessage,
+	public EIECacheRunTimeException(EIECacheErrorCodes errorCode, String errorMessage,
 			String actualerror) {
 		super();
 		this.errorCode = errorCode;
