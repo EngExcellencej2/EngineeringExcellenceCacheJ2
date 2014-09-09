@@ -37,16 +37,16 @@ public class ExceptionHandlerTemplate {
 					exception);
 			throw new EIECacheCheckedException(
 					EIECacheErrorCodes.UNSUCCESSFULL_READ,
-					"for "+uniqueIdentifier+ "no host in the cluster can be contacted successfully to execute this query",
+					"for "+uniqueIdentifier+ " no host in the cluster can be contacted successfully to execute this query",
 					exception.toString());
 		}
 		if (exception instanceof QueryExecutionException) {
 			logger.error(
-					"for "+uniqueIdentifier+ "an exception thrown by Cassandra when it cannot execute the query with the requested consistency level successfully",
+					"for "+uniqueIdentifier+ " an exception thrown by Cassandra when it cannot execute the query with the requested consistency level successfully",
 					exception);
 			throw new EIECacheCheckedException(
 					EIECacheErrorCodes.UNSUCCESSFULL_READ,
-					"for "+uniqueIdentifier+ "an exception thrown by Cassandra when it cannot execute the query with the requested consistency level successfully",
+					"for "+uniqueIdentifier+ " an exception thrown by Cassandra when it cannot execute the query with the requested consistency level successfully",
 					exception.toString());
 		}
 		if (exception instanceof QueryValidationException) {
@@ -55,16 +55,16 @@ public class ExceptionHandlerTemplate {
 					exception);
 			throw new EIECacheCheckedException(
 					EIECacheErrorCodes.UNSUCCESSFULL_READ,
-					"for "+uniqueIdentifier+ "afound syntax error, unauthorized or any other validation problem",
+					"for "+uniqueIdentifier+ " found syntax error, unauthorized or any other validation problem",
 					exception.toString());
 		}
 		if (exception instanceof UnsupportedFeatureException) {
 			logger.error(
-					"for "+uniqueIdentifier+ "BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported ",
+					"for "+uniqueIdentifier+ " BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported ",
 					exception);
 			throw new EIECacheCheckedException(
 					EIECacheErrorCodes.UNSUCCESSFULL_READ,
-					"for "+uniqueIdentifier+ "BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported",
+					"for "+uniqueIdentifier+ " BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported",
 					exception.toString());
 		} else {
 			logger.error(	"for "+uniqueIdentifier+ "error during reading data ", exception);
