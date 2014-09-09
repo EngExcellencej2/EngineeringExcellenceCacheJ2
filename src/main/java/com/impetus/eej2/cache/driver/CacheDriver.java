@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
-import com.impetus.eej2.cache.exception.EieCacheCheckedException;
+import com.impetus.eej2.cache.exception.EIECacheCheckedException;
 import com.impetus.eej2.cache.service.EIECacheServiceImpl;
 import com.impetus.eej2.cache.service.IEIECacheService;
 
@@ -17,16 +17,16 @@ public class CacheDriver {
 	//constant logger
 	private static final Logger logger = LoggerFactory.getLogger(CacheDriver.class);
 	
-	public static void main(String args[]) throws EieCacheCheckedException {
+	public static void main(String args[]) throws EIECacheCheckedException {
 		logger.info("inside main method of CacheDriver");
-		IEIECacheService cacheService = new EIECacheServiceImpl();
+		IEIECacheService cacheService = new EIECacheServiceImpl("Datastax");
 		readCache(cacheService);
 		
 	//	writeCache(cacheService);
 
 	}
 
-	private static void writeCache(IEIECacheService cacheService) throws EieCacheCheckedException {
+	private static void writeCache(IEIECacheService cacheService) throws EIECacheCheckedException {
 		logger.info("inside writeCache method of CacheDriver");
 		EIEResponse eieResponse=new EIEResponse();
 		eieResponse.setCountryCode("CC");
@@ -52,10 +52,10 @@ public class CacheDriver {
 		System.out.println("Record written in Cache"+cacheService.addEIEexternalResponse(eieResponse));
 	}
 
-	private static void readCache(IEIECacheService cacheService) throws EieCacheCheckedException {
+	private static void readCache(IEIECacheService cacheService) throws EIECacheCheckedException {
 		logger.info("inside readCache method of CacheDriver");
 		EIERequest eieRequest = new EIERequest();
-		eieRequest.setCountryCode("CC");
+		eieRequest.setCountryCode("CC22");
 		eieRequest.setTelephoneNumber("TN");
 		eieRequest.setTimeToLive(100);
 		EIEResponse eieResponse = cacheService.getEIEresponse(eieRequest);
