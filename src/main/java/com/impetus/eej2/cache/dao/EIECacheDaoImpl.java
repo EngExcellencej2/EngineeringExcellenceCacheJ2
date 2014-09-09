@@ -104,9 +104,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 		{
 			ExceptionHandlerTemplate.handleException(exception, eieReq.toString());
 		}
-		/*
-		 * finally { Do not close our singleton session. session.close(); }
-		 */
 		return eieRes;
 	}
 
@@ -133,9 +130,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 		try {
 			if(session!=null)
 			{
-			PreparedStatement preparedStatement = session.prepare(
-					INSERT_RECORD_IN_CACHE).setConsistencyLevel(
-					ConsistencyLevel.LOCAL_ONE);
 			preparedStatement = session.prepare(INSERT_RECORD_IN_CACHE)
 					.setConsistencyLevel(ConsistencyLevel.LOCAL_ONE);
 			preparedStatement.enableTracing();
@@ -162,10 +156,6 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 		catch(Exception exception)
 		{
 			ExceptionHandlerTemplate.handleException(exception, eieRes.toString());
-		}
-		finally {
-			// Do not close our singleton session.
-			// session.close();
 		}
 		return  writeflag; 
 
