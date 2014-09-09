@@ -12,15 +12,11 @@ import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.exceptions.InvalidTypeException;
-import com.datastax.driver.core.exceptions.NoHostAvailableException;
-import com.datastax.driver.core.exceptions.QueryExecutionException;
-import com.datastax.driver.core.exceptions.QueryValidationException;
-import com.datastax.driver.core.exceptions.UnsupportedFeatureException;
 import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
-import com.impetus.eej2.cache.exception.EieCacheCheckedException;
-import com.impetus.eej2.cache.exception.EieCacheErrorCodes;
+import com.impetus.eej2.cache.exception.EIECacheCheckedException;
+import com.impetus.eej2.cache.exception.EIECacheErrorCodes;
+import com.impetus.eej2.cache.exception.ExceptionHandlerTemplate;
 import com.impetus.eej2.cache.utils.CassandraConnectionUtils;
 
 /**
@@ -45,7 +41,7 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 
 	@Override
 	public EIEResponse getEIEResponse(EIERequest eieReq)
-			throws EieCacheCheckedException {
+			throws EIECacheCheckedException {
 		logger.info("inside getEIEResponse of EIECacheDaoImpl {}", eieReq);
 		String rowID = getRowID(eieReq);
 		PreparedStatement preparedStatement = null;
@@ -98,48 +94,15 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 				}
 
 			} else {
-				logger.error("session is null found");
-				throw new EieCacheCheckedException(
-						EieCacheErrorCodes.UNSUCCESSFULL_READ,
+				logger.error("session is null found",eieReq);
+				throw new EIECacheCheckedException(
+						EIECacheErrorCodes.NULL_SEESION,
 						"session is null found");
 			}
-		} catch (NoHostAvailableException noHostAvailableException) {
-			logger.error("no host in the cluster can be contacted successfully to execute this query ",
-					noHostAvailableException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_READ,
-					"no host in the cluster can be contacted successfully to execute this query",
-					noHostAvailableException.toString());
-		}
-		catch (QueryExecutionException queryExecutionException ) {
-			logger.error("an exception thrown by Cassandra when it cannot execute the query with the requested consistency level successfully",
-					queryExecutionException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_READ,
-					"an exception thrown by Cassandra when it cannot execute the query with the requested consistency level successfully",
-					queryExecutionException.toString());
-		}
-		catch (QueryValidationException queryValidationException) {
-			logger.error(" found syntax error, unauthorized or any other validation problem ",
-					queryValidationException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_READ,
-					"found syntax error, unauthorized or any other validation problem",
-					queryValidationException.toString());
-		}
-		catch (UnsupportedFeatureException unsupportedFeatureException) {
-			logger.error("BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported ",
-					unsupportedFeatureException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_READ,
-					"BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported",
-					unsupportedFeatureException.toString());
-		}
-		 catch (Exception exception) {
-			logger.error("error during reading data ", exception);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_READ,
-					"error during reading data", exception.toString());
+		} 
+		catch(Exception exception)
+		{
+			ExceptionHandlerTemplate.handleException(exception, eieReq.toString());
 		}
 		/*
 		 * finally { Do not close our singleton session. session.close(); }
@@ -162,7 +125,7 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 
 	@Override
 	public Boolean addEIEExternalReponse(EIEResponse eieRes)
-			throws EieCacheCheckedException {
+			throws EIECacheCheckedException {
 		// Session session = CassandraConnectionUtils.CONN.getSession();
 		logger.info("inside addEIEExternalReponse of EIECacheDaoImpl {}",
 				eieRes);
@@ -190,48 +153,15 @@ public class EIECacheDaoImpl implements IEIECacheDao {
 			}
 			else
 			{
-				logger.error("session is  null found");
-				throw new EieCacheCheckedException(
-						EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
+				logger.error("session is  null found",eieRes);
+				throw new EIECacheCheckedException(
+						EIECacheErrorCodes.NULL_SEESION,
 						"session  is null");
 			}
-		} catch (NoHostAvailableException noHostAvailableException) {
-			logger.error("no host in the cluster can be contacted successfully to execute this query ",
-					noHostAvailableException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
-					"no host in the cluster can be contacted successfully to execute this query",
-					noHostAvailableException.toString());
-		}
-		catch (QueryExecutionException queryExecutionException ) {
-			logger.error("an exception thrown by Cassandra when it cannot execute the query with the requested consistency level successfully",
-					queryExecutionException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
-					"an exception thrown by Cassandra when it cannot execute the query with the requested consistency level successfully",
-					queryExecutionException.toString());
-		}
-		catch (QueryValidationException queryValidationException) {
-			logger.error(" found syntax error, unauthorized or any other validation problem ",
-					queryValidationException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
-					"found syntax error, unauthorized or any other validation problem",
-					queryValidationException.toString());
-		}
-		catch (UnsupportedFeatureException unsupportedFeatureException) {
-			logger.error("BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported ",
-					unsupportedFeatureException);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
-					"BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported",
-					unsupportedFeatureException.toString());
-		}
-		catch (Exception exception) {
-			logger.error("error during writing data ", exception);
-			throw new EieCacheCheckedException(
-					EieCacheErrorCodes.UNSUCCESSFULL_WRITE,
-					"error during reading data", exception.toString());
+		} 
+		catch(Exception exception)
+		{
+			ExceptionHandlerTemplate.handleException(exception, eieRes.toString());
 		}
 		finally {
 			// Do not close our singleton session.
