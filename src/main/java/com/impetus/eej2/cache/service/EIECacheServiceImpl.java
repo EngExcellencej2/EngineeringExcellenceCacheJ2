@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.impetus.eej2.cache.dao.IEIECacheDao;
 import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
-import com.impetus.eej2.cache.exception.EieCacheCheckedException;
+import com.impetus.eej2.cache.exception.EIECacheCheckedException;
 import com.impetus.eej2.cache.factory.DaoCreationFactory;
 
 /**
@@ -42,7 +42,7 @@ public class EIECacheServiceImpl implements IEIECacheService {
 		ieieCacheDao = DaoCreationFactory.getDaoObject(driverType);
 	}
 
-	public EIEResponse getEIEresponse(EIERequest eieReq) throws EieCacheCheckedException
+	public EIEResponse getEIEresponse(EIERequest eieReq) throws EIECacheCheckedException
 			 {
 		logger.info("inside getEIEresponse of  EIECacheServiceImpl {}", eieReq);
 		EIEResponse eieResponse = null;
@@ -51,7 +51,7 @@ public class EIECacheServiceImpl implements IEIECacheService {
 	}
 
 	public Boolean addEIEexternalResponse(EIEResponse eieRes)
-			throws EieCacheCheckedException {
+			throws EIECacheCheckedException {
 		logger.info("inside addEIEexternalResponse of  EIECacheServiceImpl {}",
 				eieRes);
 		Boolean writeFlag = false;
