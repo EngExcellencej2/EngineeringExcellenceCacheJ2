@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
+import com.impetus.eej2.cache.exception.EIECacheCheckedException;
 import com.impetus.eej2.cache.service.EIECacheServiceImpl;
 
 /**
@@ -45,14 +46,15 @@ public class EIECacheServiceImplTest {
 	 */
 	@Before
 	public void createObject() {
-		eieCacheServiceImpl = new EIECacheServiceImpl();
+		eieCacheServiceImpl = new EIECacheServiceImpl("Datastax");
 	}
 	
 	/**
 	 * This method tests the write operation to the Cassandra DB 
+	 * @throws EIECacheCheckedException 
 	 */
 	@Test
-	public void testAddEIEexternalResponse() {
+	public void testAddEIEexternalResponse() throws EIECacheCheckedException {
 
 		eieResponse = new EIEResponse();
 		eieResponse.setCountryCode(CC);
@@ -80,9 +82,10 @@ public class EIECacheServiceImplTest {
 	/**
 	 * This method tests the read operation from the Cassandra DB
 	 * The record inserted above is read back.
+	 * @throws EIECacheCheckedException 
 	 */
 	@Test
-	public void testGetEIEresponse() {
+	public void testGetEIEresponse() throws EIECacheCheckedException {
 
 		eieRequest = new EIERequest();
 		eieRequest.setCountryCode(CC);
