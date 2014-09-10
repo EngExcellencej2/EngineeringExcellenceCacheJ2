@@ -54,11 +54,11 @@ public class EIERequest implements Serializable {
 		this.countryCode = countryCode;
 	}
 
-	public int getTimeToLive() {
+	public Integer getTimeToLive() {
 		return timeToLive;
 	}
 
-	public void setTimeToLive(int timeToLive) {
+	public void setTimeToLive(Integer timeToLive) {
 		this.timeToLive = timeToLive;
 	}
 
