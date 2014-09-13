@@ -13,6 +13,13 @@ findbugs{
 	ignoreFailures = true
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
 def projectName = 'EIECacheUtils'
 def propFileLocation = 'src/main/java/ipconfig.properties'
 def releaseNotesLocation = 'doc/Release_Notes_EIE_Cache_Utils 1.0.pdf' 
