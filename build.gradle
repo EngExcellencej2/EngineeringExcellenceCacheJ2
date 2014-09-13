@@ -3,6 +3,7 @@ apply plugin: 'eclipse'
 apply plugin: 'distribution'
 apply plugin: 'pmd'
 apply plugin: 'findbugs'
+apply plugin: 'jacoco'
 
 pmd{
 	ignoreFailures = true
