@@ -17,7 +17,7 @@ import com.impetus.eej2.cache.exception.EIECacheCheckedException;
  * @author EEJ2
  * 
  */
-public class EIECacheDaoImplTest {
+public class EIECacheDataStaxDAOImplTest {
 	
 	private static String TN = "12345678";
 	private static String CC = "320";
@@ -41,14 +41,14 @@ public class EIECacheDaoImplTest {
 	private static Boolean response = false;
 	private static EIERequest eieRequest = null;
 	private static EIEResponse eieResponse = null;
-	private static EIECacheDaoImpl eieCacheDaoImpl = null;
+	private static EIECacheDataStaxDAOImpl eieCacheDataStaxDaoImpl = null;
 
 	/**
 	 * This method creates the EIECacheServiceImpl instance
 	 */
 	@Before
 	public void createObject() {
-		eieCacheDaoImpl = new EIECacheDaoImpl();
+		eieCacheDataStaxDaoImpl = new EIECacheDataStaxDAOImpl();
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class EIECacheDaoImplTest {
 		eieResponse.setTelephoneNumber(TN);
 		eieResponse.setTnType(tN_Type);
 		eieResponse.setTimeToLive(writeTTL);
-		response = eieCacheDaoImpl.addEIEExternalReponse(eieResponse);
+		response = eieCacheDataStaxDaoImpl.addEIEExternalReponse(eieResponse);
 		Assert.assertEquals(true, response);
 	}
 	
@@ -84,15 +84,16 @@ public class EIECacheDaoImplTest {
 	 * This method tests the read operation from the Cassandra DB
 	 * The record inserted above is read back.
 	 * @throws EIECacheCheckedException 
+	 * @throws InterruptedException 
 	 */
 	@Test
-	public void testGetEIEresponse() throws EIECacheCheckedException{
+	public void testGetEIEresponse() throws EIECacheCheckedException, InterruptedException{
 
 		eieRequest = new EIERequest();
 		eieRequest.setCountryCode(CC);
 		eieRequest.setTelephoneNumber(TN);		
 		eieRequest.setTimeToLive(readTTL);
-		eieResponse = eieCacheDaoImpl.getEIEResponse(eieRequest);
+		eieResponse = eieCacheDataStaxDaoImpl.getEIEResponse(eieRequest);
 		Assert.assertEquals("Home", eieResponse.getTnType());
 	}
 }

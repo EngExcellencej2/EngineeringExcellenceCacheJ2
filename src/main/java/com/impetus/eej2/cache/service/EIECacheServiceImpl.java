@@ -3,11 +3,11 @@ package com.impetus.eej2.cache.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.impetus.eej2.cache.dao.IEIECacheDao;
+import com.impetus.eej2.cache.dao.IEIECacheDAO;
 import com.impetus.eej2.cache.entity.EIERequest;
 import com.impetus.eej2.cache.entity.EIEResponse;
 import com.impetus.eej2.cache.exception.EIECacheCheckedException;
-import com.impetus.eej2.cache.factory.DaoCreationFactory;
+import com.impetus.eej2.cache.factory.DAOCreationFactory;
 
 /**
  * <p>
@@ -25,7 +25,7 @@ public class EIECacheServiceImpl implements IEIECacheService {
 			.getLogger(EIECacheServiceImpl.class);
 
 	/** The ieie cache dao. */
-	private IEIECacheDao ieieCacheDao;
+	private IEIECacheDAO ieieCacheDao;
 
 	/**
 	 * Instantiates a new EIE cache service impl.
@@ -39,7 +39,7 @@ public class EIECacheServiceImpl implements IEIECacheService {
 	 */
 	private void init(String driverType) {
 		
-		ieieCacheDao = DaoCreationFactory.getDaoObject(driverType);
+		ieieCacheDao = DAOCreationFactory.getDaoObject(driverType);
 	}
 
 	public EIEResponse getEIEresponse(EIERequest eieReq) throws EIECacheCheckedException
