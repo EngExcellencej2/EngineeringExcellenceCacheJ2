@@ -14,8 +14,8 @@ public class EIECacheCheckedException extends Exception {
 	 */
 	private static final long serialVersionUID = 1L;
 	private EIECacheErrorCodes errorCode;
-	private String errorMessage;
-	private String actualerror;
+	private  String errorMessage;
+	private  String actualerror;
     
 	/**
 	 * <p>
@@ -46,9 +46,6 @@ public class EIECacheCheckedException extends Exception {
 	}
 
 	
-
-	
-
 	public EIECacheCheckedException(String errorMessage) {
 		super();
 		this.errorMessage = errorMessage;
@@ -56,10 +53,6 @@ public class EIECacheCheckedException extends Exception {
 
 	public EIECacheErrorCodes getErrorCode() {
 		return errorCode;
-	}
-
-	public void setErrorCode(EIECacheErrorCodes errorCode) {
-		this.errorCode = errorCode;
 	}
 
 	public String getErrorMessage() {
@@ -70,13 +63,7 @@ public class EIECacheCheckedException extends Exception {
 		return actualerror;
 	}
 
-	public void setActualerror(String actualerror) {
-		this.actualerror = actualerror;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
+	
     
 	
 	@Override

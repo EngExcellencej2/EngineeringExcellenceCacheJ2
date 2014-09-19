@@ -32,9 +32,6 @@ public class EIECacheRunTimeException extends RuntimeException {
 		return errorCode;
 	}
 
-	public void setErrorCode(EIECacheErrorCodes errorCode) {
-		this.errorCode = errorCode;
-	}
 
 	public String getErrorMessage() {
 		return errorMessage;
@@ -44,14 +41,7 @@ public class EIECacheRunTimeException extends RuntimeException {
 		return actualerror;
 	}
 
-	public void setActualerror(String actualerror) {
-		this.actualerror = actualerror;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
-    
+	
 	/**
 	 * <p>
 	 * Constructor for EieCacheException. Sets error code, error message and actual error for the Run Time exception.
