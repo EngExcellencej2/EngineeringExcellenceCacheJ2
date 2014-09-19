@@ -1,6 +1,6 @@
 com.impetus.eej2.cache.dao
-com.impetus.eej2.cache.driver
 com.impetus.eej2.cache.entity
 com.impetus.eej2.cache.exception
+com.impetus.eej2.cache.factory
 com.impetus.eej2.cache.service
 com.impetus.eej2.cache.utils
