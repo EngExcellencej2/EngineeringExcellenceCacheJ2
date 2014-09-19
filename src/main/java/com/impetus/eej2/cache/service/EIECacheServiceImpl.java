@@ -21,7 +21,7 @@ import com.impetus.eej2.cache.factory.DAOCreationFactory;
 public class EIECacheServiceImpl implements IEIECacheService {
 
 	/** The Constant logger. */
-	private static final Logger logger = LoggerFactory
+	private static final Logger LOGGER = LoggerFactory
 			.getLogger(EIECacheServiceImpl.class);
 
 	/** The ieie cache dao. */
@@ -44,7 +44,7 @@ public class EIECacheServiceImpl implements IEIECacheService {
 
 	public EIEResponse getEIEresponse(EIERequest eieReq)
 			throws EIECacheCheckedException {
-		logger.info("inside getEIEresponse of  EIECacheServiceImpl {}", eieReq);
+		LOGGER.info("inside getEIEresponse of  EIECacheServiceImpl {}", eieReq);
 		EIEResponse eieResponse = null;
 		eieResponse = ieieCacheDao.getEIEResponse(eieReq);
 		return eieResponse;
@@ -52,7 +52,7 @@ public class EIECacheServiceImpl implements IEIECacheService {
 
 	public Boolean addEIEexternalResponse(EIEResponse eieRes)
 			throws EIECacheCheckedException {
-		logger.info("inside addEIEexternalResponse of  EIECacheServiceImpl {}",
+		LOGGER.info("inside addEIEexternalResponse of  EIECacheServiceImpl {}",
 				eieRes);
 		Boolean writeFlag = false;
 		writeFlag = ieieCacheDao.addEIEExternalReponse(eieRes);

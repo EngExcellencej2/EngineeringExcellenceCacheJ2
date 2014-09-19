@@ -21,7 +21,7 @@ import com.impetus.eej2.cache.exception.EIECacheRunTimeException;
  */
 class PropertyReader {
 
-	private static final Logger logger = LoggerFactory
+	private static final Logger LOGGER = LoggerFactory
 			.getLogger(PropertyReader.class);
 
 	// Class has got no instance methods so suppress instance creation by
@@ -45,11 +45,11 @@ class PropertyReader {
 	 */
 	static synchronized Properties loadProperties() {
 		if (prop != null) {
-			logger.info("EIE configuration already loaded");
+			LOGGER.info("EIE configuration already loaded");
 			return prop;
 		}
-		logger.info("Load EIE Cache Configuration from properties file");
-		Properties prop = new Properties();
+		LOGGER.info("Load EIE Cache Configuration from properties file");
+		prop = new Properties();
 		InputStream input = null;
 		try {
 			String filename = "ipconfig.properties";
@@ -61,10 +61,10 @@ class PropertyReader {
 								+ " not found");
 			}
 			prop.load(input);
-			logger.debug("Configuration successfuly loaded from properties file::"
+			LOGGER.debug("Configuration successfuly loaded from properties file::"
 					+ prop);
 		} catch (IOException ioException) {
-			logger.error("Exception while reading Property file:ipconfig.properties",ioException);
+			LOGGER.error("Exception while reading Property file:ipconfig.properties",ioException);
 			throw new EIECacheRunTimeException(
 					"Exception while reading Property file:ipconfig.properties"
 							+ ioException);
@@ -73,7 +73,7 @@ class PropertyReader {
 				try {
 					input.close();
 				} catch (IOException ioException) {
-					logger.error("Exception while closing the resources",ioException);
+					LOGGER.error("Exception while closing the resources",ioException);
 				}
 			}
 		}

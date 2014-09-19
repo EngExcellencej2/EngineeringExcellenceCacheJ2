@@ -43,11 +43,11 @@ public enum CassandraConnectionUtils {
 
 	private static Cluster cluster;
 
-	private static final Logger logger = LoggerFactory
+	private static final Logger LOGGER = LoggerFactory
 			.getLogger(CassandraConnectionUtils.class);
 
 	static {
-		logger.info("Initialize EIE Cache Cassandra Cluster environment");
+		LOGGER.info("Initialize EIE Cache Cassandra Cluster environment");
 		try {
 			Properties prop = PropertyReader.loadProperties();
 			Builder builder = null;
@@ -66,9 +66,9 @@ public enum CassandraConnectionUtils {
 					.parseInt(prop
 							.getProperty(IEIECacheConstants.MIN_SIMULTANEOUS_REQ_PER_CONN_THRESHHOLD));
 			builder.addContactPoints(nodesList);
-			logger.debug("Trying to connect to Cassandra Cluster with [Data Center::"
+			LOGGER.debug("Trying to connect to Cassandra Cluster with [Data Center::"
 					+ localDC + " and Nodes::" + nodesList);
-			logger.info("Set Up Session Pool for connection");
+			LOGGER.info("Set Up Session Pool for connection");
 			PoolingOptions poolingOptions = new PoolingOptions();
 			poolingOptions.setCoreConnectionsPerHost(HostDistance.LOCAL,
 					coreConnPerHost);
@@ -87,7 +87,7 @@ public enum CassandraConnectionUtils {
 			cluster.init();
 			session = cluster.connect();
 		} catch (RuntimeException exception) {
-			logger.error(
+			LOGGER.error(
 					"Could not establish connection to Cassandra Cluster ",
 					exception);
 			throw new EIECacheRunTimeException(
@@ -96,7 +96,7 @@ public enum CassandraConnectionUtils {
 		}
 
 		Metadata metadata = cluster.getMetadata();
-		logger.info(String.format("Connected to cluster '%s' on %s.",
+		LOGGER.info(String.format("Connected to cluster '%s' on %s.",
 				metadata.getClusterName(), metadata.getAllHosts()));
 	}
 

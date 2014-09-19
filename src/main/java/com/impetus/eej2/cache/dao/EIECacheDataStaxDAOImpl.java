@@ -29,7 +29,7 @@ import com.impetus.eej2.cache.utils.CassandraConnectionUtils;
  */
 
 public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
-	private static final Logger logger = LoggerFactory
+	private static final Logger LOGGER = LoggerFactory
 			.getLogger(EIECacheDataStaxDAOImpl.class);
 
 	private static final String GET_RECORD_FROM_CACHE = "SELECT * from eie_cache_db.eie_proxydbcache  where row_id = ?";
@@ -42,7 +42,7 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 	@Override
 	public EIEResponse getEIEResponse(EIERequest eieReq)
 			throws EIECacheCheckedException {
-		logger.info("inside getEIEResponse of EIECacheDaoImpl {}", eieReq);
+		LOGGER.info("inside getEIEResponse of EIECacheDaoImpl {}", eieReq);
 		String rowID = getRowID(eieReq);
 		PreparedStatement preparedStatement = null;
 		ResultSet rowSet = null;
@@ -59,9 +59,9 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 				BoundStatement boundStatement = preparedStatement.bind(rowID);
 				rowSet = session.execute(boundStatement);
 				ExecutionInfo executionInfo = rowSet.getExecutionInfo();
-				logger.info("QUERY TRACE" + executionInfo.getQueryTrace());
-				logger.info("QUERIED HOST" + executionInfo.getQueriedHost());
-				logger.info("TRIED HOST" + executionInfo.getTriedHosts());
+				LOGGER.info("QUERY TRACE" + executionInfo.getQueryTrace());
+				LOGGER.info("QUERIED HOST" + executionInfo.getQueriedHost());
+				LOGGER.info("TRIED HOST" + executionInfo.getTriedHosts());
 				Date currentDate = new Date();
 
 				for (Row row : rowSet) {
@@ -95,7 +95,7 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 				}
 
 			} else {
-				logger.error("session is null found", eieReq);
+				LOGGER.error("session is null found", eieReq);
 				throw new EIECacheCheckedException(
 						EIECacheErrorCodes.NULL_SEESION,
 						"session is null found");
@@ -104,6 +104,7 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 			ExceptionHandlerTemplate.handleException(exception,
 					eieReq.toString());
 		}
+
 		return eieRes;
 	}
 
@@ -116,14 +117,13 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 	 * @return rowId for Cassandra record
 	 */
 	private String getRowID(EIERequest eieReq) {
-		return eieReq.getCountryCode() + "_"
-				+ eieReq.getTelephoneNumber();
+		return eieReq.getCountryCode() + "_" + eieReq.getTelephoneNumber();
 	}
 
 	@Override
 	public Boolean addEIEExternalReponse(EIEResponse eieRes)
 			throws EIECacheCheckedException {
-		logger.info("inside addEIEExternalReponse of EIECacheDaoImpl {}",
+		LOGGER.info("inside addEIEExternalReponse of EIECacheDaoImpl {}",
 				eieRes);
 		Boolean writeflag = false;
 		try {
@@ -145,7 +145,7 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 				writeflag = true;
 
 			} else {
-				logger.error("session is  null found", eieRes);
+				LOGGER.error("session is  null found", eieRes);
 				throw new EIECacheCheckedException(
 						EIECacheErrorCodes.NULL_SEESION, "session  is null");
 			}

@@ -20,7 +20,7 @@ public class ExceptionHandlerTemplate {
 	/**
 	 * constant logger
 	 */
-	private static final Logger logger = LoggerFactory
+	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ExceptionHandlerTemplate.class);
 
 	
@@ -43,7 +43,7 @@ public class ExceptionHandlerTemplate {
 	public static final void handleException(Exception exception,
 			String uniqueIdentifier) throws EIECacheCheckedException {
 		if (exception instanceof NoHostAvailableException) {
-			logger.error(
+			LOGGER.error(
 					"for "+uniqueIdentifier+ " no host in the cluster can be contacted successfully to execute this query ",
 					exception);
 			throw new EIECacheCheckedException(
@@ -52,7 +52,7 @@ public class ExceptionHandlerTemplate {
 					exception.toString());
 		}
 		if (exception instanceof QueryExecutionException) {
-			logger.error(
+			LOGGER.error(
 					"for "+uniqueIdentifier+ " an exception thrown by Cassandra when it cannot execute the query with the requested consistency level successfully",
 					exception);
 			throw new EIECacheCheckedException(
@@ -61,7 +61,7 @@ public class ExceptionHandlerTemplate {
 					exception.toString());
 		}
 		if (exception instanceof QueryValidationException) {
-			logger.error(
+			LOGGER.error(
 					"for "+uniqueIdentifier+ " found syntax error, unauthorized or any other validation problem ",
 					exception);
 			throw new EIECacheCheckedException(
@@ -70,7 +70,7 @@ public class ExceptionHandlerTemplate {
 					exception.toString());
 		}
 		if (exception instanceof UnsupportedFeatureException) {
-			logger.error(
+			LOGGER.error(
 					"for "+uniqueIdentifier+ " BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported ",
 					exception);
 			throw new EIECacheCheckedException(
@@ -78,7 +78,7 @@ public class ExceptionHandlerTemplate {
 					"for "+uniqueIdentifier+ " BatchStatement, ResultSet paging and binary values in RegularStatement may be not supported",
 					exception.toString());
 		} else {
-			logger.error(	"for "+uniqueIdentifier+ "error during reading data ", exception);
+			LOGGER.error(	"for "+uniqueIdentifier+ "error during reading data ", exception);
 			throw new EIECacheCheckedException(
 					EIECacheErrorCodes.UNSUCCESSFULL_READ,
 					"for "+uniqueIdentifier+ "error during reading data", exception.toString());
