@@ -37,27 +37,51 @@ public class EIERequest implements Serializable {
 	private String countryCode;
 	
 	private Integer timeToLive;
-
+    
+	/**
+	 * 
+	 * @return telephoneNumber 
+	 */
 	public String getTelephoneNumber() {
 		return telephoneNumber;
 	}
-
+    
+	/**
+	 * 
+	 * @param telephoneNumber
+	 */
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
 	}
-
+    
+	/**
+	 * 
+	 * @return countryCode
+	 */
 	public String getCountryCode() {
 		return countryCode;
 	}
-
+    
+	/**
+	 * 
+	 * @param countryCode
+	 */
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-
+    
+	/**
+	 * 
+	 * @return timeToLive
+	 */
 	public Integer getTimeToLive() {
 		return timeToLive;
 	}
-
+    
+	/**
+	 * 
+	 * @param timeToLive
+	 */
 	public void setTimeToLive(Integer timeToLive) {
 		this.timeToLive = timeToLive;
 	}
