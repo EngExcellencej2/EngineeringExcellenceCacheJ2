@@ -70,6 +70,7 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 							.getTime()) / 1000);
 
 					if (diff <= eieReq.getTimeToLive()) {
+						LOGGER.info("Condition met, populate EIEResponse");
 						eieRes.setId(row.getString("row_id"));
 						eieRes.setMnc(row.getString("mnc"));
 						eieRes.setMcc(row.getString("mcc"));
@@ -88,10 +89,7 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 						eieRes.setIsDataFound(true);
 						eieRes.setStatusMessage("record found in database for input TelePhoneNumber and CountryCode");
 						break;
-					} else {
-						continue;
-					}
-
+					} 
 				}
 
 			} else {
