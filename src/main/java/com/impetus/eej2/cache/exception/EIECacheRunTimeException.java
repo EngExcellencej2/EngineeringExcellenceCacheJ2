@@ -3,7 +3,7 @@ package com.impetus.eej2.cache.exception;
 /**
  * @author sharad.agarwal
  * <p>
- * Exception Framework For EIE Cache Utils.
+ * An extension of Checked Exception. The utility exceptions are wrapped in this Custom unchecked Exception
  * </p>
  *
  */

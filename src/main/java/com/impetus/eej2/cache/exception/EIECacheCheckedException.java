@@ -1,5 +1,12 @@
 package com.impetus.eej2.cache.exception;
 
+/**
+ * @author deepali.choudhary
+ * <p>
+ * An extension of Checked Exception. The utility exceptions are wrapped in this Custom checked Exception
+ * </p>
+ * @version 0.2
+ */
 public class EIECacheCheckedException extends Exception {
 
 	/**
@@ -9,7 +16,14 @@ public class EIECacheCheckedException extends Exception {
 	private EIECacheErrorCodes errorCode;
 	private String errorMessage;
 	private String actualerror;
-
+    
+	/**
+	 * <p>
+	 * Constructor for EieCacheException. Sets error code, error message for the exception.
+	 * </p>
+	 * @param errorCode
+	 * @param errorMessage
+	 */
 	public EIECacheCheckedException(EIECacheErrorCodes errorCode, String errorMessage) {
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
@@ -17,7 +31,7 @@ public class EIECacheCheckedException extends Exception {
 	
 	/**
 	 * <p>
-	 * Constructor for EieCacheException. Sets error code, error message and actual error for the Run Time exception.
+	 * Constructor for EieCacheException. Sets error code, error message and actual error for the exception.
 	 * </p>
 	 * @param errorCode
 	 * @param errorMessage
