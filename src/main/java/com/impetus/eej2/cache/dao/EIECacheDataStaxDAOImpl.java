@@ -99,7 +99,7 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 						"session is null found");
 			}
 		} catch (Exception exception) {
-			ExceptionHandlerTemplate.handleException(exception,
+			ExceptionHandlerTemplate.handleException(EIECacheErrorCodes.UNSUCCESSFULL_READ,exception,
 					eieReq.toString());
 		}
 
@@ -148,7 +148,7 @@ public class EIECacheDataStaxDAOImpl implements IEIECacheDAO {
 						EIECacheErrorCodes.NULL_SEESION, "session  is null");
 			}
 		} catch (Exception exception) {
-			ExceptionHandlerTemplate.handleException(exception,
+			ExceptionHandlerTemplate.handleException(EIECacheErrorCodes.UNSUCCESSFULL_WRITE,exception,
 					eieRes.toString());
 		}
 		return writeflag;
